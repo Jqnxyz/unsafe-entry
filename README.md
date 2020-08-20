@@ -1,6 +1,9 @@
 # UnsafeEntry
+
 also known as *unprotected sex*
+
 ---
+
 ## What is this
 Tool for mocking the SafeEntry pass.
 
