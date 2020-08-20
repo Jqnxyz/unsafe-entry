@@ -26,6 +26,29 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
 ];
 
+function getOffsetDateObj() {
+	let currentDate = new Date();
+	let offsetMs = hrOffset*3600000;
+	let passDateObj = new Date(currentDate.getTime()+offsetMs);
+	return passDateObj
+}
+
+function getDateString() {
+	let passDateObj = getOffsetDateObj();
+	let passDate = passDateObj.getDate() + " " + monthNames[passDateObj.getMonth()] + " " + passDateObj.getFullYear(); 
+	return passDate
+}
+
+function getTimeString() {
+	let passDateObj = getOffsetDateObj();
+	let passHours = passDateObj.getHours() > 12 ? passDateObj.getHours()-12 : passDateObj.getHours();
+	let passMinutes = passDateObj.getMinutes() >= 10 ? passDateObj.getMinutes() : "0" + passDateObj.getMinutes();
+	let passAMPM = passDateObj.getHours() >= 12 ? "PM" : "AM";
+	let passTime = passHours + ":" + passMinutes + " " + passAMPM;
+
+	return passTime
+}
+
 //View Engine
 
 app.set("view engine", "pug");
@@ -36,13 +59,21 @@ app.use('/assets', express.static('web/assets'))
 
 // Views
 router.get("/", (req, res) => {
+	console.log("**REQUEST START**")
+	console.log("root: " + req)
     res.redirect('/entry');
+	console.log("**REQUEST END**")
 });
 router.get("/entry", (req, res) => {
+	console.log("**REQUEST START**")
+	console.log("entry: " + req)
 	res.render("entry");
+	console.log("**REQUEST END**")
 });
 
 router.get("/parse", (req, res) => {
+	console.log("**REQUEST START**")
+	console.log("parse: " + req)
 	let seUrl = decodeURIComponent(req.query.seUrl);
 	let seMatch01 = seUrl.match(/^https\:\/\/www\.safeentry-qr\.gov\.sg\/tenant\/([A-Z0-9-/]+)/);
 	let seMatch02 = seUrl.match(/^https\:\/\/temperaturepass\.ndi-api\.gov\.sg\/login\/([A-Z0-9-/]+)/);
@@ -86,39 +117,32 @@ router.get("/parse", (req, res) => {
 		console.log("Invalid URL");
     	res.redirect('/entry');
 	}
+	console.log("**REQUEST END**")
 });
 
 
 router.get("/pass/v1", (req, res) => {
 	let passLocation = req.query.venue;
-	let passDateObj = new Date();
-	let passDate = passDateObj.getDate() + " " + monthNames[passDateObj.getMonth()] + " " + passDateObj.getFullYear(); 
-	let passHours = passDateObj.getHours()+hrOffset > 12 ? passDateObj.getHours()+hrOffset-12 : passDateObj.getHours()+hrOffset;
-	let passMinutes = passDateObj.getMinutes() >= 10 ? passDateObj.getMinutes() : "0" + passDateObj.getMinutes();
-	let passAMPM = passDateObj.getHours()+hrOffset >= 12 ? "PM" : "AM";
-	let passTime = passHours + ":" + passMinutes + " " + passAMPM;
-	console.log("Pass: " + passDate + ", " + passTime)
+	console.log("**REQUEST START**")
+	console.log("pass/v1: " + req)
 	res.render("pass",{
   		location: passLocation.toUpperCase(),
-  		date: passDate,
-  		time: passTime
+  		date: getDateString(),
+  		time: getTimeString()
 	});
+	console.log("**REQUEST END**")
 });
 
 router.get("/pass/v2", (req, res) => {
 	let passLocation = req.query.venue;
-	let passDateObj = new Date();
-	let passDate = passDateObj.getDate() + " " + monthNames[passDateObj.getMonth()] + " " + passDateObj.getFullYear(); 
-	let passHours = passDateObj.getHours()+hrOffset > 12 ? passDateObj.getHours()+hrOffset-12 : passDateObj.getHours()+hrOffset;
-	let passMinutes = passDateObj.getMinutes() >= 10 ? passDateObj.getMinutes() : "0" + passDateObj.getMinutes();
-	let passAMPM = passDateObj.getHours()+hrOffset >= 12 ? "PM" : "AM";
-	let passTime = passHours + ":" + passMinutes + " " + passAMPM;
-	console.log("Pass-V2: " + passDate + ", " + passTime)
+	console.log("**REQUEST START**")
+	console.log("pass/v2: " + req)
 	res.render("pass_v2",{
   		location: passLocation.toUpperCase(),
-  		date: passDate,
-  		time: passTime
+  		date: getDateString(),
+  		time: getTimeString()
 	});
+	console.log("**REQUEST END**")
 });
 
 app.use("/", router);
