@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/jqnxyz/unsafe-entry/issues"
   },
-  "homepage": "https://github.com/jqnxyz/unsafe-entry#readme"
+  "homepage": "https://github.com/jqnxyz/unsafe-entry#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "pug": "^3.0.0"
+  }
 }
