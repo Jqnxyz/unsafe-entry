@@ -1,0 +1,113 @@
+#useBody {
+	width: 100vw;
+	align-content: center;
+	text-align: center;
+    font-family: 'Roboto', sans-serif;
+}
+
+#useHeader {
+	width: 100vw;
+	height: 16vh;
+}
+
+#useLogo {
+	width: 100%;
+    height: 8vh;
+}
+
+#useLogoImage {
+	vertical-align: middle;
+    border-style: none;
+    box-sizing: border-box;
+    white-space: nowrap;
+    height: 100%;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+}
+
+#useBanner {
+	width: 100%;
+	background-color: #1c9747;
+	color: #ffffff;
+    height: 8vh;
+}
+
+#useBannerIcon {
+	margin-right: 2vw;
+    top: 0.5vh;
+    font-size: 3vh;
+    position:relative
+}
+
+#useBannerText {
+	font-size: 3vh;
+	margin: 0;
+    padding-top: 2vh;
+    padding-bottom: 2.5vh;
+    display: inline-block;
+    position:relative;
+}
+
+#useContent {
+
+}
+
+/* use Pass*/
+#usePass {
+	color: #1b1c1e;
+	height: 55vh;
+	margin-top: 5vh;
+	padding-left: 5vw;
+	padding-right: 5vw;
+}
+
+/* Upper use Pass*/
+#usePassLogo {
+	background-color: #1c9747;
+	border-radius: 5vw 5vw 0 0;
+	height: 50%;
+}
+
+#usePassLogoImage {
+	vertical-align: middle;
+    border-style: none;
+    box-sizing: border-box;
+    white-space: nowrap;
+    height: 100%;
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+}
+
+/* Lower use Pass */
+#usePassContent {
+	background-color: #dddddd;
+	border-radius: 0 0 5vw 5vw;
+	height: 50%;
+}
+
+#usePassContentTexts {
+	padding-top: 1vh;
+}
+
+.usePassText {
+	margin: 0;
+}
+
+#usePassContentLocation {
+    font-size: 3vh;
+}
+
+#usePassContentDate {
+    font-size: 6vh;
+    margin-top: 3vh;
+    font-weight: bold;
+}
+
+#usePassContentTime {
+    font-size: 5vh;
+    margin-top: 2vh;
+}
+
+#usePassGovTech {
+
+}
