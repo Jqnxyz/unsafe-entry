@@ -2,6 +2,9 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
+//UTC Offset
+hrOffset = 8;
+
 // Https BS
 const fs = require('fs');
 const http = require('http');
@@ -41,9 +44,17 @@ router.get("/entry", (req, res) => {
 
 router.get("/parse", (req, res) => {
 	let seUrl = decodeURIComponent(req.query.seUrl);
-	let seMatch = seUrl.match(/https\:\/\/www\.safeentry-qr\.gov\.sg\/tenant\/[A-Z0-9-/]+/);
-	if (seMatch !== null) {
-		let seClient = seUrl.split('/')[4];
+	let seMatch01 = seUrl.match(/^https\:\/\/www\.safeentry-qr\.gov\.sg\/tenant\/([A-Z0-9-/]+)/);
+	let seMatch02 = seUrl.match(/^https\:\/\/temperaturepass\.ndi-api\.gov\.sg\/login\/([A-Z0-9-/]+)/);
+	let seClient = null;
+	if (seMatch01 !== null) {
+		seClient = seMatch01[1];
+	}
+	if (seMatch02 !== null) {
+		seClient = seMatch02[1];
+	}
+
+	if (seClient !== null) {
 		let seBeUrl = "https://backend.safeentry-qr.gov.sg/api/v2/building?client_id="+seClient;
 		axios.get(seBeUrl, {
 		  	headers: {
@@ -81,7 +92,7 @@ router.get("/pass", (req, res) => {
 	let passLocation = req.query.venue;
 	let passDateObj = new Date();
 	let passDate = passDateObj.getDate() + " " + monthNames[passDateObj.getMonth()] + " " + passDateObj.getFullYear(); 
-	let passHours = passDateObj.getHours() > 12 ? passDateObj.getHours()-12 : passDateObj.getHours();
+	let passHours = passDateObj.getHours()+hrOffset > 12 ? passDateObj.getHours()+hrOffset-12 : passDateObj.getHours()+hrOffset;
 	let passMinutes = passDateObj.getMinutes() >= 10 ? passDateObj.getMinutes() : "0" + passDateObj.getMinutes();
 	let passAMPM = passDateObj.getHours() >= 12 ? "PM" : "AM";
 	let passTime = passHours + ":" + passMinutes + " " + passAMPM;
