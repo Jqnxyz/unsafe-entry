@@ -11,7 +11,7 @@
 
 #useLogo {
 	width: 100%;
-    height: 8vh;
+    height: 7vh;
 }
 
 #useLogoImage {
@@ -28,7 +28,7 @@
 	width: 100%;
 	background-color: #1c9747;
 	color: #ffffff;
-    height: 8vh;
+    height: 7vh;
 }
 
 #useBannerIcon {
@@ -41,8 +41,7 @@
 #useBannerText {
 	font-size: 3vh;
 	margin: 0;
-    padding-top: 2vh;
-    padding-bottom: 2.5vh;
+    padding-top: 1.6vh;
     display: inline-block;
     position:relative;
 }
@@ -62,6 +61,7 @@
 	background-color: #dddddd;
 	border-radius: 5vw;
 	height: 70vh;
+	font-size: 3vh;
 }
 
 /* Upper use Pass*/
@@ -90,7 +90,9 @@
 }
 
 #usePassContentTexts {
-	padding-top: 2vh;
+	height: 27vh;
+	padding-top: 3vh;
+    font-weight: bold;
 }
 
 .usePassText {
@@ -98,24 +100,22 @@
 }
 
 #usePassContentLocation {
-    font-size: 3vh;
+    font-size: 2vh;
 }
 
 #usePassContentDate {
-    font-size: 6vh;
-    margin-top: 3vh;
-    font-weight: bold;
+    font-size: 5vh;
+    margin-top: 1vh;
 }
 
 #usePassContentTime {
-    font-size: 5vh;
+    font-size: 4vh;
     margin-top: 2vh;
 }
 
 #usePassGovTech {
-	height: 3vh;
-    margin-top: 5vh;
-    margin-bottom: 5vh;
+	height: 5vh;
+    vertical-align: bottom;
 }
 
 #usePassGovTechImage {
@@ -123,5 +123,19 @@
     border-style: none;
     box-sizing: border-box;
     white-space: nowrap;
-    height: 100%;
+	height: 3vh;
+}
+
+/* QR Scan */
+#qrScanElement {
+	width: 100%;
+	height: auto;
+	display: none;
+	text-align: center;
+	align-content: center;
+}
+
+#qrScanButton, #qrUrlInput, #seUrlButton {
+	font-size: 3vh;	
+	margin-top: 5vh;
 }

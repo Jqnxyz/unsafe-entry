@@ -7,15 +7,31 @@ head
   link(rel='icon', href='assets/favicon.svg', sizes='any', type='image/svg+xml')
   // Fonts
   link(href='https://fonts.googleapis.com/icon?family=Material+Icons', rel='stylesheet')
+  // Scripts
+  script(src='assets/js/qr-scanner.umd.min.js')
 #useHeader
   #useLogo
     img#useLogoImage(src='assets/se-logo-navbar.svg')
 #useContent
   #usePass
     #usePassFullContent
-      #usePassContentTexts
-        p#usePassContentLocation.usePassText #{location}
-        p#usePassContentDate.usePassText #{date}
-        p#usePassContentTime.usePassText #{time}
-      #usePassGovTech
-        img
+      video#qrScanElement
+      script.
+        QrScanner.WORKER_PATH = 'assets/js/qr-scanner-worker.min.js'
+        const qrScanner = new QrScanner(document.getElementById("qrScanElement"), result => {
+          qrScanner.stop()
+          window.location = "/parse?seUrl=" + result
+        });
+        function startQrScan(){
+        qrScanner.start()
+        document.getElementById("qrScanElement").style.display = 'block'
+        }
+        function submitSeUrl(){
+        let seUrl = document.getElementById("qrUrlInput").value
+        window.location = "/parse?seUrl=" + seUrl
+        }
+      button#qrScanButton(onclick='startQrScan()') Scan QR Code
+      p Or enter the QR URL here
+      input#qrUrlInput(name='qrUrlInput', type='text')
+      br
+      button#seUrlButton(onclick='submitSeUrl()') Submit URL

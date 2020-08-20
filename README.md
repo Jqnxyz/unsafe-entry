@@ -2,8 +2,6 @@
 
 also known as *unprotected sex*
 
----
-
 ## What is this
 Tool for mocking the SafeEntry pass.
 
@@ -17,7 +15,10 @@ cd unsafe-entry
 npm install
 node index.js
 ```
-Then visit `localhost:3000/pass` on your local machine.
+Then visit `localhost:3000` on your local machine.
+
+## Acknowledgements
+* NIMIQ's QR Scanner ([License](Licenses/QR-SCANNER-LICENSE), [Repo](https://github.com/nimiq/qr-scanner))
 
 ## License
-MPL-2.0
+[Mozilla Public License Version 2.0 (MPL-2.0)](LICENSE.md)
