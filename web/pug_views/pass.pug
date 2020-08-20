@@ -1,0 +1,26 @@
+doctype html
+head
+  meta(charset='utf-8')
+  title SafeEntry
+  link(rel='stylesheet', href='assets/pass.css')
+  // Favicon
+  link(rel='icon', href='assets/favicon.svg', sizes='any', type='image/svg+xml')
+  // Fonts
+  link(href='https://fonts.googleapis.com/icon?family=Material+Icons', rel='stylesheet')
+#useHeader
+  #useLogo
+    img#useLogoImage(src='assets/se-logo-navbar.svg')
+  #useBanner
+    span#useBannerIcon.material-icons check_circle
+    p#useBannerText Check in successful!
+#useContent
+  #usePass
+    #usePassLogo
+      img#usePassLogoImage(src='assets/sep.svg')
+    #usePassContent
+      #usePassContentTexts
+        p#usePassContentLocation.usePassText #{location}
+        p#usePassContentDate.usePassText #{date}
+        p#usePassContentTime.usePassText #{time}
+      #usePassGovTech
+        img#usePassGovTechImage(src='assets/gt_logo.svg')

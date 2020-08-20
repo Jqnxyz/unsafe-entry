@@ -1,4 +1,4 @@
-#useBody {
+#useHeader, #useContent {
 	width: 100vw;
 	align-content: center;
 	text-align: center;
@@ -7,7 +7,6 @@
 
 #useHeader {
 	width: 100vw;
-	height: 16vh;
 }
 
 #useLogo {
@@ -49,26 +48,31 @@
 }
 
 #useContent {
-
+	margin-top: 2vh;
 }
 
 /* use Pass*/
 #usePass {
 	color: #1b1c1e;
-	height: 55vh;
-	margin-top: 5vh;
 	padding-left: 5vw;
 	padding-right: 5vw;
+}
+
+#usePassFullContent {
+	background-color: #dddddd;
+	border-radius: 5vw;
+	height: 70vh;
 }
 
 /* Upper use Pass*/
 #usePassLogo {
 	background-color: #1c9747;
 	border-radius: 5vw 5vw 0 0;
-	height: 50%;
+	height: 35vh;
 }
 
 #usePassLogoImage {
+    max-width: 80%;
 	vertical-align: middle;
     border-style: none;
     box-sizing: border-box;
@@ -82,11 +86,11 @@
 #usePassContent {
 	background-color: #dddddd;
 	border-radius: 0 0 5vw 5vw;
-	height: 50%;
+	height: 35vh;
 }
 
 #usePassContentTexts {
-	padding-top: 1vh;
+	padding-top: 2vh;
 }
 
 .usePassText {
@@ -109,5 +113,15 @@
 }
 
 #usePassGovTech {
+	height: 3vh;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+}
 
+#usePassGovTechImage {
+	vertical-align: middle;
+    border-style: none;
+    box-sizing: border-box;
+    white-space: nowrap;
+    height: 100%;
 }
