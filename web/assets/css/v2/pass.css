@@ -1,0 +1,155 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
+
+#useHeader, #useContent {
+	width: 100vw;
+	align-content: center;
+	text-align: center;
+    font-family: 'Roboto', sans-serif;
+}
+
+#useHeader {
+	width: 100vw;
+}
+
+#useLogo {
+	width: 100%;
+    height: 13vh;
+}
+
+#useLogoImage {
+	vertical-align: middle;
+    border-style: none;
+    box-sizing: border-box;
+    white-space: nowrap;
+    height: 7vh;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    margin-top: 4vh;
+}
+
+#useBanner {
+	width: 100%;
+	background-color: #1c9747;
+	color: #ffffff;
+    height: 7vh;
+}
+
+#useBannerIcon {
+	margin-right: 2vw;
+    top: 0.5vh;
+    font-size: 3vh;
+    position:relative
+}
+
+#useBannerText {
+	font-size: 3vh;
+	margin: 0;
+    padding-top: 1.6vh;
+    display: inline-block;
+    position:relative;
+}
+
+#useContent {
+	margin-top: -2vh;
+}
+
+/* use Pass*/
+#usePass {
+	color: #1b1c1e;
+	padding-left: 5vw;
+	padding-right: 5vw;
+}
+
+#usePassFullContent {
+	background-color: ##fbf9f9;
+	border-radius: 5vw;
+	height: 70vh;
+	font-size: 3vh;
+}
+
+#usePassCheck { 
+    top: 3.5vh;
+    height: 7vh;
+    position: relative;
+}
+
+/* Upper use Pass*/
+#usePassLogo {
+	background-color: #1eaf71;
+	border-radius: 5vw 5vw 0 0;
+	height: 18.5vh;
+    box-shadow: 5px 0px 20px -10px #00000061;;
+}
+
+#usePassLogoImage {
+    max-width: 80%;
+	vertical-align: middle;
+    border-style: none;
+    box-sizing: border-box;
+    white-space: nowrap;
+    height: 100%;
+    padding-top: 8.5vh;
+    padding-bottom: 5vh;
+}
+
+/* Lower use Pass */
+#usePassContent {
+	background-color: #fbf9f9;
+	border-radius: 0 0 5vw 5vw;
+	height: 35vh;
+    box-shadow: 5px 5px 20px -10px #00000061;;
+}
+
+#usePassContentTexts {
+	height: 27vh;
+	padding-top: 3vh;
+    font-weight: bold;
+}
+
+.usePassText {
+	margin: 0;
+}
+
+#usePassContentLocation {
+    font-size: 5vh;
+    margin-top: 2vh;
+    font-weight: normal;
+}
+
+#usePassContentDate {
+    font-size: 4vh;
+}
+
+#usePassContentTime {
+    font-size: 3vh;
+    margin-top: 2vh;
+}
+
+#usePassGovTech {
+	height: 5vh;
+    vertical-align: bottom;
+}
+
+#usePassGovTechImage {
+	vertical-align: middle;
+    border-style: none;
+    box-sizing: border-box;
+    white-space: nowrap;
+	height: 3vh;
+}
+
+/* QR Scan */
+#qrScanElement {
+	width: 100%;
+	height: auto;
+	display: none;
+	text-align: center;
+	align-content: center;
+}
+
+#qrScanButton, #qrUrlInput, #seUrlButton {
+	font-size: 3vh;	
+	margin-top: 5vh;
+}
