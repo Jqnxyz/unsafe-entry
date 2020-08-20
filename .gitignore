@@ -1,4 +1,2 @@
-
-node_modules/.bin/acorn
-node_modules/.bin/parser
-node_modules/@babel/helper-validator-identifier/README.md
+package-lock.json
+node_modules/*
