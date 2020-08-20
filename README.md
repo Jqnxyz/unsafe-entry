@@ -19,6 +19,8 @@ Then visit `localhost:3000` on your local machine.
 
 ## Acknowledgements
 * NIMIQ's QR Scanner ([License](Licenses/QR-SCANNER-LICENSE), [Repo](https://github.com/nimiq/qr-scanner))
+* ExpressJS ([License](Licenses/EXPRESS-LICENSE), [Repo](https://github.com/expressjs/express))
+* PugJS ([License](Licenses/PUG-LICENSE), [Repo](https://github.com/pugjs/pug))
 
 ## License
 [Mozilla Public License Version 2.0 (MPL-2.0)](LICENSE.md)

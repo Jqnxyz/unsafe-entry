@@ -1,4 +1,8 @@
-//Https bs
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
+
+// Https BS
 const fs = require('fs');
 const http = require('http');
 const https = require('https');
@@ -19,13 +23,15 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
 ];
 
+//View Engine
+
 app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "web/pug_views"));
 
-//statics
+// Statics
 app.use('/assets', express.static('web/assets'))
 
-//views
+// Views
 router.get("/", (req, res) => {
     res.redirect('/entry');
 });
@@ -34,15 +40,10 @@ router.get("/entry", (req, res) => {
 });
 
 router.get("/parse", (req, res) => {
-	// Test url
 	let seUrl = decodeURIComponent(req.query.seUrl);
-	//let seUrl = "https://www.safeentry-qr.gov.sg/tenant/PROD-53115265X-323712-IFRAMEOPTICS-SE"
 	let seMatch = seUrl.match(/https\:\/\/www\.safeentry-qr\.gov\.sg\/tenant\/[A-Z0-9-/]+/);
 	if (seMatch !== null) {
 		let seClient = seUrl.split('/')[4];
-
-		//let seClient = "PROD-53115265X-323712-IFRAMEOPTICS-SE";
-		//let seURL = "https://www.safeentry-qr.gov.sg/tenant/PROD-53115265X-323712-IFRAMEOPTICS-SE;
 		let seBeUrl = "https://backend.safeentry-qr.gov.sg/api/v2/building?client_id="+seClient;
 		axios.get(seBeUrl, {
 		  	headers: {
@@ -77,7 +78,6 @@ router.get("/parse", (req, res) => {
 });
 
 router.get("/pass", (req, res) => {
-	//let passLocation = "天安门广场";
 	let passLocation = req.query.venue;
 	let passDateObj = new Date();
 	let passDate = passDateObj.getDate() + " " + monthNames[passDateObj.getMonth()] + " " + passDateObj.getFullYear(); 
@@ -94,7 +94,6 @@ router.get("/pass", (req, res) => {
 });
 
 app.use("/", router);
-//app.listen(process.env.port || 3000);
 
 var httpServer = http.createServer(app);
 var httpsServer = https.createServer(credentials, app);
