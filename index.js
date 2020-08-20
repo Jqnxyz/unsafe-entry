@@ -73,7 +73,7 @@ router.get("/parse", (req, res) => {
 		.then(function (response) {
 			//console.log(response);
 			let seVenue = response.data['venueName'];
-			res.redirect('/pass?venue=' + seVenue);
+			res.redirect('/pass/v2?venue=' + seVenue);
 		})
 		.catch(function (error) {
 			console.log(error);
@@ -88,7 +88,8 @@ router.get("/parse", (req, res) => {
 	}
 });
 
-router.get("/pass", (req, res) => {
+
+router.get("/pass/v1", (req, res) => {
 	let passLocation = req.query.venue;
 	let passDateObj = new Date();
 	let passDate = passDateObj.getDate() + " " + monthNames[passDateObj.getMonth()] + " " + passDateObj.getFullYear(); 
@@ -98,6 +99,22 @@ router.get("/pass", (req, res) => {
 	let passTime = passHours + ":" + passMinutes + " " + passAMPM;
 	console.log("Pass: " + passDate + ", " + passTime)
 	res.render("pass",{
+  		location: passLocation.toUpperCase(),
+  		date: passDate,
+  		time: passTime
+	});
+});
+
+router.get("/pass/v2", (req, res) => {
+	let passLocation = req.query.venue;
+	let passDateObj = new Date();
+	let passDate = passDateObj.getDate() + " " + monthNames[passDateObj.getMonth()] + " " + passDateObj.getFullYear(); 
+	let passHours = passDateObj.getHours()+hrOffset > 12 ? passDateObj.getHours()+hrOffset-12 : passDateObj.getHours()+hrOffset;
+	let passMinutes = passDateObj.getMinutes() >= 10 ? passDateObj.getMinutes() : "0" + passDateObj.getMinutes();
+	let passAMPM = passDateObj.getHours() >= 12 ? "PM" : "AM";
+	let passTime = passHours + ":" + passMinutes + " " + passAMPM;
+	console.log("Pass-V2: " + passDate + ", " + passTime)
+	res.render("pass_v2",{
   		location: passLocation.toUpperCase(),
   		date: passDate,
   		time: passTime
