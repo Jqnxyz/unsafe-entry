@@ -34,9 +34,11 @@ Several routes (all `GET`) are defined for this;
 * `/entry`
 	User interface for scanning and providing a URL.
 * `/parse`
-	Parses a QR-SafeEntry URL to find the venue name, returns a redirect to either `/entry` if failed or `/pass` with the appropriate parameters attached.
-* `/pass`
-	Display a SafeEntry pass with the current date and time, using the venue provided in a `?venue=` parameter. 
+	Parses a QR-SafeEntry URL to find the venue name, returns a redirect to either `/entry` if failed or `/pass/v2` with the appropriate parameters attached.
+* `/pass/v1`
+	Display the older SafeEntry pass with the current date and time, using the venue provided in a `?venue=` parameter. 
+* `/pass/v2`
+	Display the newer SafeEntry pass with the current date and time, using the venue provided in a `?venue=` parameter. 
 
 ## Known Bugs
 * **FIXED** `/pass` displays current date and time of the server, not client. (Though considering the use is entirely within SGP, forcing UTC+0800 is a viable option)
