@@ -95,7 +95,7 @@ router.get("/pass/v1", (req, res) => {
 	let passDate = passDateObj.getDate() + " " + monthNames[passDateObj.getMonth()] + " " + passDateObj.getFullYear(); 
 	let passHours = passDateObj.getHours()+hrOffset > 12 ? passDateObj.getHours()+hrOffset-12 : passDateObj.getHours()+hrOffset;
 	let passMinutes = passDateObj.getMinutes() >= 10 ? passDateObj.getMinutes() : "0" + passDateObj.getMinutes();
-	let passAMPM = passDateObj.getHours() >= 12 ? "PM" : "AM";
+	let passAMPM = passDateObj.getHours()+hrOffset >= 12 ? "PM" : "AM";
 	let passTime = passHours + ":" + passMinutes + " " + passAMPM;
 	console.log("Pass: " + passDate + ", " + passTime)
 	res.render("pass",{
@@ -111,7 +111,7 @@ router.get("/pass/v2", (req, res) => {
 	let passDate = passDateObj.getDate() + " " + monthNames[passDateObj.getMonth()] + " " + passDateObj.getFullYear(); 
 	let passHours = passDateObj.getHours()+hrOffset > 12 ? passDateObj.getHours()+hrOffset-12 : passDateObj.getHours()+hrOffset;
 	let passMinutes = passDateObj.getMinutes() >= 10 ? passDateObj.getMinutes() : "0" + passDateObj.getMinutes();
-	let passAMPM = passDateObj.getHours() >= 12 ? "PM" : "AM";
+	let passAMPM = passDateObj.getHours()+hrOffset >= 12 ? "PM" : "AM";
 	let passTime = passHours + ":" + passMinutes + " " + passAMPM;
 	console.log("Pass-V2: " + passDate + ", " + passTime)
 	res.render("pass_v2",{
