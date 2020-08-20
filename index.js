@@ -104,7 +104,7 @@ router.get("/parse", (req, res) => {
 		.then(function (response) {
 			//console.log(response);
 			let seVenue = response.data['venueName'];
-			res.redirect('/pass/v2?venue=' + seVenue);
+			res.redirect('/pass/v2/entry?venue=' + seVenue);
 		})
 		.catch(function (error) {
 			console.log(error);
@@ -121,7 +121,7 @@ router.get("/parse", (req, res) => {
 });
 
 
-router.get("/pass/v1", (req, res) => {
+router.get("/pass/v1/entry", (req, res) => {
 	let passLocation = req.query.venue;
 	console.log("**REQUEST START**")
 	console.log("pass/v1: " + req)
@@ -133,7 +133,7 @@ router.get("/pass/v1", (req, res) => {
 	console.log("**REQUEST END**")
 });
 
-router.get("/pass/v2", (req, res) => {
+router.get("/pass/v2/entry", (req, res) => {
 	let passLocation = req.query.venue;
 	console.log("**REQUEST START**")
 	console.log("pass/v2: " + req)

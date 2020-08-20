@@ -35,9 +35,9 @@ Several routes (all `GET`) are defined for this;
 	User interface for scanning and providing a URL.
 * `/parse`
 	Parses a QR-SafeEntry URL to find the venue name, returns a redirect to either `/entry` if failed or `/pass/v2` with the appropriate parameters attached.
-* `/pass/v1`
+* `/pass/v1/entry`
 	Display the older SafeEntry pass with the current date and time, using the venue provided in a `?venue=` parameter. 
-* `/pass/v2`
+* `/pass/v2/entry`
 	Display the newer SafeEntry pass with the current date and time, using the venue provided in a `?venue=` parameter. 
 
 ## Known Bugs
