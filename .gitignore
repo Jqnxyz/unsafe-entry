@@ -1,3 +1,4 @@
 package-lock.json
 node_modules/*
 reference_html/*
+*.DS_STORE
