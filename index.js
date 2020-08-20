@@ -124,7 +124,7 @@ router.get("/parse", (req, res) => {
 router.get("/pass/v1/entry", (req, res) => {
 	let passLocation = req.query.venue;
 	console.log("**REQUEST START**")
-	console.log("pass/v1: " + req)
+	console.log("pass/v1/entry: " + req)
 	res.render("pass",{
   		location: passLocation.toUpperCase(),
   		date: getDateString(),
@@ -136,7 +136,7 @@ router.get("/pass/v1/entry", (req, res) => {
 router.get("/pass/v2/entry", (req, res) => {
 	let passLocation = req.query.venue;
 	console.log("**REQUEST START**")
-	console.log("pass/v2: " + req)
+	console.log("pass/v2/entry: " + req)
 	res.render("pass_v2",{
   		location: passLocation.toUpperCase(),
   		date: getDateString(),

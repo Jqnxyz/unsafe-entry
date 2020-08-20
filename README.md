@@ -9,8 +9,8 @@ Tool for mocking the SafeEntry pass.
 ~Inhabitants of Singapore do not have free will.~
 For fun.
 
-## Missing/wrong pass design elements?
-[Create an issue](https://github.com/Jqnxyz/unsafe-entry/issues/new), describe with screenshots if you can.
+## Feature Requests/Issues
+[Create an issue](https://github.com/Jqnxyz/unsafe-entry/issues/new), provide images/screenshots if you can.
 
 ## Setup
 ```sh
