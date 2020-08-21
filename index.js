@@ -2,15 +2,21 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
-//UTC Offset
+// UTC Offset
 hrOffset = 8;
 
-// Https BS
+// JSON Config
 const fs = require('fs');
+let jsonConfigData = fs.readFileSync('unsafe-config.json');
+let certLocations = JSON.parse(jsonConfigData);
+console.log("Private Key=" + certLocations['private_key'])
+console.log("Public certificate=" + certLocations['public_certs'])
+
+// Https BS
 const http = require('http');
 const https = require('https');
-let privateKey  = fs.readFileSync('web/tls/use_cert_private.key', 'utf8');
-let certificate = fs.readFileSync('web/tls/use_cert_only.crt', 'utf8');
+let privateKey  = fs.readFileSync(certLocations['private_key'], 'utf8');
+let certificate = fs.readFileSync(certLocations['public_certs'], 'utf8');
 const credentials = {key: privateKey, cert: certificate};
 
 
@@ -75,8 +81,8 @@ router.get("/parse", (req, res) => {
 	console.log("**REQUEST START**")
 	console.log("parse: " + req)
 	let seUrl = decodeURIComponent(req.query.seUrl);
-	let seMatch01 = seUrl.match(/^https\:\/\/www\.safeentry-qr\.gov\.sg\/tenant\/([A-Z0-9-/]+)/);
-	let seMatch02 = seUrl.match(/^https\:\/\/temperaturepass\.ndi-api\.gov\.sg\/login\/([A-Z0-9-/]+)/);
+	let seMatch01 = seUrl.match(/^(?:url:)?https\:\/\/www\.safeentry-qr\.gov\.sg\/tenant\/([A-Z0-9-/]+)/);
+	let seMatch02 = seUrl.match(/^(?:url:)?https\:\/\/temperaturepass\.ndi-api\.gov\.sg\/login\/([A-Z0-9-/]+)/);
 	let seClient = null;
 	if (seMatch01 !== null) {
 		seClient = seMatch01[1];
@@ -124,7 +130,7 @@ router.get("/parse", (req, res) => {
 router.get("/pass/v1/entry", (req, res) => {
 	let passLocation = req.query.venue;
 	console.log("**REQUEST START**")
-	console.log("pass/v1/entry: " + req)
+	console.log("pass/v1/entryz: " + req)
 	res.render("pass",{
   		location: passLocation.toUpperCase(),
   		date: getDateString(),
@@ -136,7 +142,7 @@ router.get("/pass/v1/entry", (req, res) => {
 router.get("/pass/v2/entry", (req, res) => {
 	let passLocation = req.query.venue;
 	console.log("**REQUEST START**")
-	console.log("pass/v2/entry: " + req)
+	console.log("pass/v2/entryz: " + req)
 	res.render("pass_v2",{
   		location: passLocation.toUpperCase(),
   		date: getDateString(),

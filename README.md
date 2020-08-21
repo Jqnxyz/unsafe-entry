@@ -20,13 +20,43 @@ git clone git@github.com:jqnxyz/unsafe-entry
 cd unsafe-entry
 # Installs all dependencies
 npm install
+```
+
+Create a file, `unsafe-config.json` in the directory of the cloned project. E.g. `../unsafe-entry/unsafe-config.json`.
+
+Contents of the file:
+```json
+{
+	"private_key":"web/tls/use_cert_private.key",
+	"public_certs":"web/tls/use_cert_only.crt"
+}
+```
+
+*Change certificate paths to point to your proper certificates if deploying outside your local machine.*
+
+Once done, you can start the server.
+
+```sh
 # Starts up the server
 node index.js
 ```
+
 Then visit `localhost:8443` on your local machine.
 
+## Scripts
+* `deploy.sh` is a basic script I use to make git deployment to an AWS instance easier, it relies on a config file `deploy-config.json`, you can add as many instances as needed as long as both `instance-ids` and `target-hosts` have the same number of entries.
+* `instances.sh` also relies on `deploy-config.json` and provides a simple command for starting or stopping an AWS instance. Usage: `./instances.sh <start/stop>`.
+
+```json
+// Example deploy-config.json
+{
+	"instance-ids":["i-a1b2c3d4e5f6g7h8i9"],
+	"target-hosts":["ubuntu@123.123.123.123"]
+}
+```
+
 ## Notes
-* If hosting on a remote server, set `hrOffset` to an integer value to account for UTC time difference. Default is *8*.
+* If hosting on a remote server, ensure `hrOffset` is set to account for UTC time difference. **Default is 8**.
 * While `index.js` does listen on port `8080`, QR-scanning functionality may not work under an insecure connection.
 * Basic self-signed TLS certificates are provided to work out-of-the-box. If you are using this outside your local machine, please use a proper certificate issued by a trusted certificate authority.
 
