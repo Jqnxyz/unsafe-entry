@@ -34,11 +34,14 @@ Contents of the file:
 
 *Change certificate paths to point to your proper certificates if deploying outside your local machine.*
 
-Once done, you can start the server.
+*Tested on Ubuntu/debian only!* Set up the service file to allow control with `systemctl`, and start it.
 
 ```sh
+sudo cp /var/www-node/unsafe-entry/unsafe-entry.service /etc/systemd/system/unsafe-entry.service; 
+# This enables start on boot, useful innit?
+sudo systemctl enable unsafe-entry;
 # Starts up the server
-node index.js
+sudo systemctl start unsafe-entry; 
 ```
 
 Then visit `localhost:8443` on your local machine.

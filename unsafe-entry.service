@@ -1,0 +1,17 @@
+[Unit]
+Description=Unsafe-Entry
+
+[Service]
+ExecStart=/var/www-node/unsafe-entry/index.js
+Restart=on-failure
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=process
+User=root
+# Note Debian/Ubuntu uses 'nogroup', RHEL/Fedora uses 'nobody'
+Group=root
+Environment=PATH=/usr/bin:/usr/local/bin
+Environment=NODE_ENV=production
+WorkingDirectory=/var/www-node/unsafe-entry/
+
+[Install]
+WantedBy=multi-user.target
