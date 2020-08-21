@@ -85,4 +85,5 @@ Several routes (all `GET`) are defined for this;
 * PugJS ([License](Licenses/PUG-LICENSE), [Repo](https://github.com/pugjs/pug))
 
 ## License
-[Mozilla Public License Version 2.0 (MPL-2.0)](LICENSE.md)
+* All source code, unless specified otherwise, is licensed under the [Mozilla Public License Version 2.0 (MPL-2.0)](LICENSE.md).
+* All `.svg` files in `web/assets/images` and `web/assets/favicon.svg` are not covered by the above license(s).
