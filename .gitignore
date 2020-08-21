@@ -5,3 +5,4 @@ reference_html/*
 *.localized
 deploy-config.json
 unsafe-config.json
+web/assets/Unused/*
