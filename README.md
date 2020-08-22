@@ -81,9 +81,6 @@ Several routes (all `GET`) are defined for this;
 * `/pass/v2/entry`
 	Display the newer SafeEntry pass with the current date and time, using the venue provided in a `?venue=` parameter. 
 
-## Known Bugs
-* **FIXED** `/pass` displays current date and time of the server, not client. (Though considering the use is entirely within SGP, forcing UTC+0800 is a viable option)
-
 ## Acknowledgements
 * NIMIQ's QR Scanner ([License](Licenses/QR-SCANNER-LICENSE), [Repo](https://github.com/nimiq/qr-scanner))
 * ExpressJS ([License](Licenses/EXPRESS-LICENSE), [Repo](https://github.com/expressjs/express))
