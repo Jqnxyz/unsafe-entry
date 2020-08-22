@@ -1,13 +1,33 @@
 # UnsafeEntry
 
-also known as *unprotected sex*
-
-## What is this
-Tool for mocking the SafeEntry pass.
+Web service to mimick SafeEntry passes.
 
 ## Why
-~Inhabitants of Singapore do not have free will.~
-For fun.
+
+While SafeEntry is a good concept for contact tracing efforts, the implementation leaves much to be desired.
+
+With the normalisation of SafeEntry, many users essentially have their freedom of movement limited if they decide that they want to maintain control of their privacy.
+
+This paves the way for a dangerous possibility where analysis of such a massive collection of location data could be done with possible malicious intent (e.g. prediction of individual movements through pattern analysis).
+
+### How it could be better
+
+Much like how the Exposure Notification system works, we could ,*instead* of centralising the movements of **all** users, centralise the movements of those who have been **infected**. 
+
+This allows SafeEntry to store the users' movements locally, checking against the central database to see if any of the venue visitation periods recorded by the *infected* users coincides with any of the local users' recorded movements.
+
+This way, all infected peoples' records could be uploaded anonymously, and the user does not have their movement data collected until they are proven to be infected.
+
+### Downsides to this workaround
+
+* You won't be able to be contacted through SafeEntry tracing methods if you've been exposed to an infected patient.
+
+* You won't be able to contribute past movements to SafeEntry if you decide to switch back to using SafeEntry.
+	* A workaround to this is to either manually record your visits and/or leave Google's location history feature on to provide data to MOH if you are infected.
+
+### Project lifetime
+
+Until users are given the choice to withhold their data, or a privacy-preserving solution is presented and implemented, this project will continue to provide a workaround for those who seek such choices.
 
 ## Feature Requests/Issues
 [Create an issue](https://github.com/Jqnxyz/unsafe-entry/issues/new), provide images/screenshots if you can.
