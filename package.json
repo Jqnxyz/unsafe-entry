@@ -4,8 +4,8 @@
     "description": "Mock SafeEntry, protect privacy.",
     "main": "start.js",
     "scripts": {
-        "test": "cp unsafe-config.json.example unsafe-config.json && jest",
-        "test:watch": "cp unsafe-config.json.example unsafe-config.json && jest --watch"
+        "test": "jest",
+        "test:watch": "jest --watch"
     },
     "repository": {
         "type": "git",
