@@ -29,7 +29,7 @@ build:
     - shippable_retry npm install
     - mkdir -p $TEST_RESULTS_DIR && mkdir -p $CODE_COVERAGE_DIR
     - pushd $TESTS_LOC_DIR
-    - run: cp unsafe-config.json.example unsafe-config.json
+    - cp unsafe-config.json.example unsafe-config.json
     - npm ci
     - npm run build --if-present
     - npm test
