@@ -1,0 +1,9 @@
+{
+	"insecureWebserver": false,
+	"secureWebserver": true,
+	"httpPort": 8080,
+	"httpsPort": 8443,
+	"private_key":"web/tls/use_cert_private.key",
+	"public_certs":"web/tls/use_cert_only.crt",
+	"utcOffset": 8
+}

@@ -98,12 +98,12 @@
 #usePassContent {
 	background-color: #fbf9f9;
 	border-radius: 0 0 5vw 5vw;
-	height: 35vh;
+	min-height: 35vh;
     box-shadow: 5px 5px 20px -10px #00000061;;
 }
 
 #usePassContentTexts {
-	height: 27vh;
+	/*height: 27vh;*/
 	padding-top: 3vh;
     font-weight: bold;
 }
@@ -115,6 +115,7 @@
 #usePassContentLocation {
     font-size: 5vh;
     margin-top: 2vh;
+    margin-bottom: 2vh;
     font-weight: normal;
 }
 

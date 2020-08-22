@@ -13,6 +13,7 @@ For fun.
 [Create an issue](https://github.com/Jqnxyz/unsafe-entry/issues/new), provide images/screenshots if you can.
 
 ## Setup
+### Initialising
 ```sh
 # SSH git clone
 git clone git@github.com:jqnxyz/unsafe-entry
@@ -22,29 +23,33 @@ cd unsafe-entry
 npm install
 ```
 
-Create a file, `unsafe-config.json` in the directory of the cloned project. E.g. `../unsafe-entry/unsafe-config.json`.
+### Configuration
+Rename `unsafe-config.json.example` to `unsafe-config.json`. Edit the configuration as needed.
 
-Contents of the file:
-```json
-{
-	"private_key":"web/tls/use_cert_private.key",
-	"public_certs":"web/tls/use_cert_only.crt"
-}
-```
+*Ensure to change certificate paths to point to a trusted CA-issued certificate pair if deploying outside your local machine.*
 
-*Change certificate paths to point to your proper certificates if deploying outside your local machine.*
 
-*Tested on Ubuntu/debian only!* Set up the service file to allow control with `systemctl`, and start it.
+### Running the server
+Start the server with `node index.js`
+
+Then visit `localhost:8443` on your local machine.
+
+#### Service file
+*Tested on Ubuntu/debian only!* 
+
+Instead of using a command to start the server, a service file can make deployment easier.
+
+Set up the service file `unsafe-entry.service` to allow control with `systemctl`, and start it.
+
+*Change the source path below to where the cloned repo resides.*
 
 ```sh
-sudo cp /var/www-node/unsafe-entry/unsafe-entry.service /etc/systemd/system/unsafe-entry.service; 
+sudo cp /path/to/unsafe-entry.service /etc/systemd/system/unsafe-entry.service; 
 # This enables start on boot, useful innit?
 sudo systemctl enable unsafe-entry;
 # Starts up the server
 sudo systemctl start unsafe-entry; 
 ```
-
-Then visit `localhost:8443` on your local machine.
 
 ## Scripts
 * `deploy.sh` is a basic script I use to make git deployment to an AWS instance easier, it relies on a config file `deploy-config.json`, you can add as many instances as needed as long as both `instance-ids` and `target-hosts` have the same number of entries.
