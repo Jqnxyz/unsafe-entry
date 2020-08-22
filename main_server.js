@@ -123,25 +123,23 @@ router.get("/parse", (req, res) => {
 	}
 });
 
-
-router.get("/pass/v1/entry", (req, res) => {
+// Render a pass
+function renderPass(ver, req, res) {
 	let passLocation = req.query.venue !== undefined ? req.query.venue : "No parameter";
 	logRequest(req);
-	res.render("pass",{
+	res.render(ver,{
   		location: passLocation.toUpperCase(),
   		date: getDateString(),
   		time: getTimeString()
 	});
+}
+
+router.get("/pass/v1/entry", (req, res) => {
+	renderPass("pass", req, res);
 });
 
 router.get("/pass/v2/entry", (req, res) => {
-	let passLocation = req.query.venue !== undefined ? req.query.venue : "No parameter";
-	logRequest(req);
-	res.render("pass_v2",{
-  		location: passLocation.toUpperCase(),
-  		date: getDateString(),
-  		time: getTimeString()
-	});
+	renderPass("pass_v2", req, res);
 });
 
 app.use("/", router);
