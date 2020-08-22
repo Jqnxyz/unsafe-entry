@@ -6,3 +6,4 @@ reference_html/*
 deploy-config.json
 unsafe-config.json
 web/assets/Unused/*
+old/*
