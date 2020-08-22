@@ -1,4 +1,6 @@
 {
+	"logRequestBasic": true,
+	"logRequestDetail": false,
 	"insecureWebserver": false,
 	"secureWebserver": true,
 	"httpPort": 8080,
