@@ -1,25 +1,29 @@
 {
-  "name": "unsafe-entry",
-  "version": "0.0.1",
-  "description": "Mock SafeEntry, protect privacy.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jqnxyz/unsafe-entry.git"
-  },
-  "author": "Zen Q",
-  "license": "MPL-2.0",
-  "bugs": {
-    "url": "https://github.com/jqnxyz/unsafe-entry/issues"
-  },
-  "homepage": "https://github.com/jqnxyz/unsafe-entry#readme",
-  "dependencies": {
-    "axios": "^0.19.2",
-    "express": "^4.17.1",
-    "pug": "^3.0.0"
-  }
+    "name": "unsafe-entry",
+    "version": "0.0.2",
+    "description": "Mock SafeEntry, protect privacy.",
+    "main": "start.js",
+    "scripts": {
+        "test": "jest",
+        "test:watch": "jest --watch"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/jqnxyz/unsafe-entry.git"
+    },
+    "author": "Zen Q",
+    "license": "MPL-2.0",
+    "bugs": {
+        "url": "https://github.com/jqnxyz/unsafe-entry/issues"
+    },
+    "homepage": "https://github.com/jqnxyz/unsafe-entry#readme",
+    "dependencies": {
+        "axios": "^0.19.2",
+        "express": "^4.17.1",
+        "pug": "^3.0.0"
+    },
+    "devDependencies": {
+        "jest": "^26.4.2",
+        "supertest": "^4.0.2"
+    }
 }
-
