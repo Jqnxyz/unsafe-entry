@@ -8,9 +8,6 @@ branches:
     - master
     - dev
 
-node_js:
-  - 0.14
-
 # using pre-defined build variables
 # full list http://docs.shippable.com/ci/advancedOptions/environmentVariables/
 env:
