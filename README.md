@@ -1,6 +1,6 @@
 # UnsafeEntry
 
-Web service to mimick SafeEntry passes.
+Web service to mimic SafeEntry passes.
 ---
 [![Run Status](https://api.shippable.com/projects/5f4163513d3f9800071fc2c7/badge?branch=master)]()
 [![Maintainability](https://api.codeclimate.com/v1/badges/1ce8c042ffecebc073ba/maintainability)](https://codeclimate.com/github/Jqnxyz/unsafe-entry/maintainability)
