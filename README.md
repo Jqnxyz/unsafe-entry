@@ -1,6 +1,6 @@
 # UnsafeEntry
 
-Web service to mimick SafeEntry passes.
+Web service to mimic SafeEntry passes.
 ---
 [![Maintainability](https://api.codeclimate.com/v1/badges/1ce8c042ffecebc073ba/maintainability)](https://codeclimate.com/github/Jqnxyz/unsafe-entry/maintainability)
 [![Last Commit](https://badgen.net/github/last-commit/jqnxyz/unsafe-entry)]()
