@@ -28,6 +28,11 @@ Rename `unsafe-config.json.example` to `unsafe-config.json`. Edit the configurat
 
 *Ensure to change certificate paths to point to a trusted CA-issued certificate pair if deploying outside your local machine.*
 
+### Development
+* Create a branch or a fork to commit changes to.
+* All tests should be placed in `__tests__/`
+* Run tests using `npm run test` or `npm run test:watch`
+* Commits directly to `master` should only be done in emergencies. Otherwise, create a pull request.
 
 ### Running the server
 Start the server with `node index.js`
