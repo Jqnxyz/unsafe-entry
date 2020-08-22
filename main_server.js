@@ -7,20 +7,10 @@
 const configLoader = require('./config_loader.js');
 const unsafeConfig = configLoader.getConfig();
 
-// Inspect Util
-const util = require('util')
-
-function logRequest(req) {
-	if (unsafeConfig['logRequestBasic']) console.log("Request to " + req.url + " at " + getDateString() + ", " + getTimeString()); 
-	if (unsafeConfig['logRequestDetail']) {
-		console.log("---REQUEST START---");
-		console.log("root: " + util.inspect(req, {
-			'showProxy': true,
-			'colors': true 
-		}));
-		console.log("---REQUEST END---");
-	}
-}
+// Tools
+const renderers = require('./renderers.js');
+const parsers = require('./parsers.js');
+const utilities = require('./utilities.js');
 
 //Routing
 const express = require("express");
@@ -29,37 +19,7 @@ const app = express();
 const path = require("path");
 const router = express.Router();
 
-//Date tools
-const hrOffset = parseInt(unsafeConfig['utcOffset']);
-const monthNames = ["January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December"
-];
-
-function getOffsetDateObj() {
-	let currentDate = new Date();
-	let offsetUtcMs = currentDate.getTimezoneOffset()*60*1000 >= 0 ? currentDate.getTimezoneOffset()*60*1000 : currentDate.getTimezoneOffset()*60*1000*-1;
-	let offsetCustomMs = hrOffset*3600000-offsetUtcMs;
-	let passDateObj = new Date(currentDate.getTime()+offsetCustomMs);
-	return passDateObj;
-}
-
-function getDateString() {
-	let passDateObj = getOffsetDateObj();
-	let passDate = passDateObj.getDate() + " " + monthNames[passDateObj.getMonth()] + " " + passDateObj.getFullYear(); 
-	return passDate;
-}
-
-function getTimeString() {
-	let passDateObj = getOffsetDateObj();
-	let passHours = passDateObj.getHours() > 12 ? passDateObj.getHours()-12 : passDateObj.getHours();
-	let passMinutes = passDateObj.getMinutes() >= 10 ? passDateObj.getMinutes() : "0" + passDateObj.getMinutes();
-	let passAMPM = passDateObj.getHours() >= 12 ? "PM" : "AM";
-	let passTime = passHours + ":" + passMinutes + " " + passAMPM;
-	return passTime;
-}
-
 //View Engine
-
 app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "web/pug_views"));
 
@@ -68,26 +28,18 @@ app.use('/assets', express.static('web/assets'));
 
 // Views
 router.get("/", (req, res) => {
-	logRequest(req);
+	utilities.logRequest(req);
     res.redirect('/entry');
 });
 router.get("/entry", (req, res) => {
-	logRequest(req);
+	utilities.logRequest(req);
 	res.render("entry");
 });
 
 router.get("/parse", (req, res) => {
-	logRequest(req);
+	utilities.logRequest(req);
 	let seUrl = decodeURIComponent(req.query.seUrl);
-	let seMatch01 = seUrl.match(/^(?:url:)?https\:\/\/www\.safeentry-qr\.gov\.sg\/tenant\/([A-Z0-9-/]+)/);
-	let seMatch02 = seUrl.match(/^(?:url:)?https\:\/\/temperaturepass\.ndi-api\.gov\.sg\/login\/([A-Z0-9-/]+)/);
-	let seClient = null;
-	if (seMatch01 !== null) {
-		seClient = seMatch01[1];
-	}
-	if (seMatch02 !== null) {
-		seClient = seMatch02[1];
-	}
+	let seClient = parsers.parseGovUrl(seUrl);
 
 	if (seClient !== null) {
 		let seBeUrl = "https://backend.safeentry-qr.gov.sg/api/v2/building?client_id="+seClient;
@@ -123,23 +75,13 @@ router.get("/parse", (req, res) => {
 	}
 });
 
-// Render a pass
-function renderPass(ver, req, res) {
-	let passLocation = req.query.venue !== undefined ? req.query.venue : "No parameter";
-	logRequest(req);
-	res.render(ver,{
-  		location: passLocation.toUpperCase(),
-  		date: getDateString(),
-  		time: getTimeString()
-	});
-}
 
 router.get("/pass/v1/entry", (req, res) => {
-	renderPass("pass", req, res);
+	renderers.renderPass("pass", req, res);
 });
 
 router.get("/pass/v2/entry", (req, res) => {
-	renderPass("pass_v2", req, res);
+	renderers.renderPass("pass_v2", req, res);
 });
 
 app.use("/", router);
