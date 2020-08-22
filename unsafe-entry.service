@@ -6,7 +6,7 @@
 Description=Unsafe-Entry
 
 [Service]
-ExecStart=/usr/bin/env node /var/www-node/unsafe-entry/index.js
+ExecStart=/usr/bin/env node /var/www-node/unsafe-entry/start.js
 Restart=on-failure
 ExecReload=/bin/kill -HUP $MAINPID
 KillMode=process
