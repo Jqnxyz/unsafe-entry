@@ -3,38 +3,24 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
+// JSON Config
+const configLoader = require('./config_loader.js');
+const unsafeConfig = configLoader.getConfig();
 
 // Inspect Util
 const util = require('util')
 
-// JSON Config
-const fs = require('fs');
-const jsonConfigData = fs.readFileSync('unsafe-config.json');
-const unsafeConfig = JSON.parse(jsonConfigData);
-console.log("---");
-console.log("Using config:");
-console.log(util.inspect(unsafeConfig, {
-	'colors': true
-}));
-console.log("---");
-// Set settings
-const insecureServer = unsafeConfig['insecureWebserver'];
-const secureServer = unsafeConfig['secureWebserver'];
-const httpPort = parseInt(unsafeConfig['httpPort']);
-const httpsPort = parseInt(unsafeConfig['httpsPort']);
-const privateCertificateLocation = unsafeConfig['private_key'];
-const publicCertificateLocation = unsafeConfig['public_certs'];
-
-// Https BS
-const http = require('http');
-const https = require('https');
-const privateKey  = fs.readFileSync(privateCertificateLocation, 'utf8');
-const certificate = fs.readFileSync(publicCertificateLocation, 'utf8');
-const credentials = {
-	key: privateKey, 
-	cert: certificate
-};
-
+function logRequest(req) {
+	if (unsafeConfig['logRequestBasic']) console.log("Request to " + req.url + " at " + getDateString() + ", " + getTimeString()); 
+	if (unsafeConfig['logRequestDetail']) {
+		console.log("---REQUEST START---");
+		console.log("root: " + util.inspect(req, {
+			'showProxy': true,
+			'colors': true 
+		}));
+		console.log("---REQUEST END---");
+	}
+}
 
 //Routing
 const express = require("express");
@@ -82,30 +68,16 @@ app.use('/assets', express.static('web/assets'));
 
 // Views
 router.get("/", (req, res) => {
-	console.log("**REQUEST START**");
-	console.log("root: " + util.inspect(req, {
-		'showProxy': true,
-		'colors': true 
-	}));
+	logRequest(req);
     res.redirect('/entry');
-	console.log("**REQUEST END**");
 });
 router.get("/entry", (req, res) => {
-	console.log("**REQUEST START**");
-	console.log("entry: " + util.inspect(req, {
-		'showProxy': true,
-		'colors': true 
-	}));
+	logRequest(req);
 	res.render("entry");
-	console.log("**REQUEST END**");
 });
 
 router.get("/parse", (req, res) => {
-	console.log("**REQUEST START**");
-	console.log("parse: " + util.inspect(req, {
-		'showProxy': true,
-		'colors': true 
-	}));
+	logRequest(req);
 	let seUrl = decodeURIComponent(req.query.seUrl);
 	let seMatch01 = seUrl.match(/^(?:url:)?https\:\/\/www\.safeentry-qr\.gov\.sg\/tenant\/([A-Z0-9-/]+)/);
 	let seMatch02 = seUrl.match(/^(?:url:)?https\:\/\/temperaturepass\.ndi-api\.gov\.sg\/login\/([A-Z0-9-/]+)/);
@@ -149,49 +121,31 @@ router.get("/parse", (req, res) => {
 		console.log("Invalid URL");
     	res.redirect('/entry');
 	}
-	console.log("**REQUEST END**");
 });
 
 
 router.get("/pass/v1/entry", (req, res) => {
-	let passLocation = req.query.venue;
-	console.log("**REQUEST START**");
-	console.log("pass/v1/entryz: " + util.inspect(req, {
-		'showProxy': true,
-		'colors': true 
-	}));
+	let passLocation = req.query.venue !== undefined ? req.query.venue : "No parameter";
+	logRequest(req);
 	res.render("pass",{
   		location: passLocation.toUpperCase(),
   		date: getDateString(),
   		time: getTimeString()
 	});
-	console.log("**REQUEST END**");
 });
 
 router.get("/pass/v2/entry", (req, res) => {
-	let passLocation = req.query.venue;
-	console.log("**REQUEST START**");
-	console.log("pass/v2/entry: " + util.inspect(req, {
-		'showProxy': true,
-		'colors': true 
-	}));
+	let passLocation = req.query.venue !== undefined ? req.query.venue : "No parameter";
+	logRequest(req);
 	res.render("pass_v2",{
   		location: passLocation.toUpperCase(),
   		date: getDateString(),
   		time: getTimeString()
 	});
-	console.log("**REQUEST END**");
 });
 
 app.use("/", router);
 
-var httpServer = insecureServer ? http.createServer(app) : null;
-var httpsServer = secureServer ? https.createServer(credentials, app) : null;
+module.exports = app
 
-if (httpServer !== null ) httpServer.listen(httpPort);
-if (httpsServer !== null ) httpsServer.listen(httpsPort);
-
-
-console.log("Running UnsafeEntry");
-console.log("---");
-console.log("Requests:");
+console.log("Loaded Main Server");
