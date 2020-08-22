@@ -13,17 +13,16 @@ it('Testing entry endpoint', async done => {
     done()
 })
 
-it('Testing pass v1 entry endpoint', async done => {
-  	const res = await request.get('/pass/v1/entry')
-  	expect(res.status).toBe(200);
-    done()
-})
+const passEntryVersions = ['v1', 'v2'];
 
-it('Testing pass v2 entry endpoint', async done => {
-  	const res = await request.get('/pass/v2/entry')
-  	expect(res.status).toBe(200);
+passEntryVersions.forEach( function(element, index) {
+  it('Testing pass entry endpoint ' + element, async done => {
+    const res = await request.get('/pass/' + element + '/entry')
+    expect(res.status).toBe(200);
     done()
-})
+  })
+});
+
 
 it('Testing parse endpoint', async done => {
 	const seUrl = "https://temperaturepass.ndi-api.gov.sg/login/PROD-T16MC0110C-JUNCTIONNINE-SE"	
