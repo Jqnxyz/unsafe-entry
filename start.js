@@ -7,7 +7,8 @@
 // Config
 const fs = require('fs');
 const util = require('util');
-const configLoader = require('./config_loader.js');
+const configLoader = require('./config_loader');
+configLoader.setFile('unsafe-config.json');
 const unsafeConfig = configLoader.getConfig();
 
 console.log("---");

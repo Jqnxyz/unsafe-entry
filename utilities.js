@@ -5,6 +5,7 @@
 const util = require('util')
 //Config
 const configLoader = require('./config_loader.js');
+configLoader.setFile('unsafe-config.json');
 const unsafeConfig = configLoader.getConfig();
 
 //Date tools

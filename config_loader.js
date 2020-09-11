@@ -5,12 +5,19 @@
 console.log("Loading config");
 // JSON Config
 const fs = require('fs');
-const jsonConfigData = fs.readFileSync('unsafe-config.json');
-const unsafeConfig = JSON.parse(jsonConfigData);
+jsonLocation = '';
 
 const getConfig = () => {
-	return unsafeConfig;
+    jsonConfigData = fs.readFileSync(jsonLocation);
+    return JSON.parse(jsonConfigData);
+    console.log("Loaded Config : " + jsonLocation);
+}
+
+const setFile = (fileLocation) => {
+    jsonLocation = fileLocation;
+    console.log("Set Config: " + fileLocation);
 }
 
 exports.getConfig = getConfig;
-console.log("Loaded Config");
+exports.setFile = setFile;
+
