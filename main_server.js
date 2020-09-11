@@ -31,9 +31,15 @@ router.get("/", (req, res) => {
 	utilities.logRequest(req);
     res.redirect('/entry');
 });
+
 router.get("/entry", (req, res) => {
 	utilities.logRequest(req);
 	res.render("entry");
+});
+
+router.get("/qr", (req, res) => {
+	utilities.logRequest(req);
+	res.render("entry_auto");
 });
 
 router.get("/parse", (req, res) => {

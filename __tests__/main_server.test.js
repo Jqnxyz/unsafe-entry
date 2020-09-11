@@ -8,8 +8,14 @@ const request = supertest(app)
 
 // Main webserver
 it('Testing entry endpoint', async done => {
-  	const res = await request.get('/entry')
-  	expect(res.status).toBe(200);
+    const res = await request.get('/entry')
+    expect(res.status).toBe(200);
+    done()
+})
+
+it('Testing QR endpoint', async done => {
+    const res = await request.get('/qr')
+    expect(res.status).toBe(200);
     done()
 })
 
