@@ -24,21 +24,3 @@ basicUniqueEndpoints.forEach( function(element, index) {
     done()
   })
 });
-
-const passEntryVersions = ['v1', 'v2'];
-
-passEntryVersions.forEach( function(element, index) {
-  it('Testing pass entry endpoint ' + element, async done => {
-    const res = await request.get('/pass/' + element + '/entry')
-    expect(res.status).toBe(200);
-    done()
-  })
-});
-
-
-it('Testing parse endpoint', async done => {
-	const seUrl = "https://temperaturepass.ndi-api.gov.sg/login/PROD-T16MC0110C-JUNCTIONNINE-SE"	
-  	const res = await request.get('/parse?seUrl=' + encodeURIComponent(seUrl))
-  	expect(res.status).toBe(302);
-    done()
-})
