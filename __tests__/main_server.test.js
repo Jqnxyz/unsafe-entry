@@ -6,18 +6,24 @@ const app = require('../main_server.js')
 const supertest = require('supertest')
 const request = supertest(app)
 
-// Main webserver
-it('Testing entry endpoint', async done => {
-    const res = await request.get('/entry')
-    expect(res.status).toBe(200);
-    done()
-})
+const basicUniqueEndpoints = ['/entry', '/qr'];
+const redirect302Endpoints = ['/'];
 
-it('Testing QR endpoint', async done => {
-    const res = await request.get('/qr')
+redirect302Endpoints.forEach( function(element, index) {
+  it('Testing 302 endpoint ' + element, async done => {
+    const res = await request.get(element)
+    expect(res.status).toBe(302);
+    done()
+  })
+});
+
+basicUniqueEndpoints.forEach( function(element, index) {
+  it('Testing basic endpoint ' + element, async done => {
+    const res = await request.get(element)
     expect(res.status).toBe(200);
     done()
-})
+  })
+});
 
 const passEntryVersions = ['v1', 'v2'];
 
