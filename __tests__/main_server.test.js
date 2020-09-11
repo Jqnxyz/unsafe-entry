@@ -6,21 +6,18 @@ const app = require('../main_server.js')
 const supertest = require('supertest')
 const request = supertest(app)
 
-const basicUniqueEndpoints = ['/entry', '/qr'];
-const redirect302Endpoints = ['/'];
+const endpointReturnCodes = [200, 302];
+const endpoint200 = ['/entry', '/qr'];
+const endpoint302 = ['/'];
 
-redirect302Endpoints.forEach( function(element, index) {
-  it('Testing 302 endpoint ' + element, async done => {
-    const res = await request.get(element)
-    expect(res.status).toBe(302);
-    done()
-  })
-});
+const endpointReturnCodeArrays = [endpoint200, endpoint302];
 
-basicUniqueEndpoints.forEach( function(element, index) {
-  it('Testing basic endpoint ' + element, async done => {
-    const res = await request.get(element)
-    expect(res.status).toBe(200);
-    done()
-  })
+endpointReturnCodes.forEach( function(element, index) {
+  endpointReturnCodeArrays[index].forEach( function(subelement, subindex) {
+    it('Testing ' + element + ' type endpoints' + element, async done => {
+      const res = await request.get(subelement)
+      expect(res.status).toBe(element);
+      done()
+    });
+  });
 });
