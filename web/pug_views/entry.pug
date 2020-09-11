@@ -33,10 +33,18 @@ head
         let seUrl = document.getElementById("qrUrlInput").value
         window.location = "/parse?seUrl=" + seUrl
         }
+        function submitSePass(){
+        let sePass = document.getElementById("qrPassInput").value
+        window.location = "/pass/v2/entry?venue=" + sePass
+        }
       button#qrScanButton(onclick='startQrScan()') Scan QR Code
       p Or enter the QR URL here
       input#qrUrlInput(name='qrUrlInput', type='text')
       br
       button#seUrlButton(onclick='submitSeUrl()') Submit URL
+      p Enter custom Pass text
+      input#qrPassInput(name='qrPassInput', type='text')
+      br
+      button#sePassButton(onclick='submitSePass()') Create Pass
       br
       a(href='/qr' style='margin-top:1vh') Quick scan
