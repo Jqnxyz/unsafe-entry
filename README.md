@@ -104,6 +104,8 @@ Several routes (all `GET`) are defined for this;
 	Redirects to `/entry`
 * `/entry`
 	User interface for scanning and providing a URL.
+* `/qr `
+	Instantly launches the QR scanning frame for quick scanning.
 * `/parse`
 	Parses a QR-SafeEntry URL to find the venue name, returns a redirect to either `/entry` if failed or `/pass/v2` with the appropriate parameters attached.
 * `/pass/v1/entry`
