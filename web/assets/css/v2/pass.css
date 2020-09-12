@@ -150,9 +150,24 @@
 	align-content: center;
 }
 
-#qrScanButton, #qrUrlInput, #seUrlButton {
-	font-size: 3vh;
+#qrScanButton {
+	font-size: 2vh;
 	margin-top: 5vh;
+}
+
+#qrUrlTitle, #qrPassTitle {
+    font-size: 2vh;
+}
+
+#seUrlButton, #sePassButton {
+    font-size: 2vh;
+    margin-top: 2vh;
+}
+
+#qrUrlInput, #qrPassInput {
+    font-size: 1.5vh;
+    margin-top: 2vh;
+    width: 70vw;
 }
 
 /* QR Dedicated scanner */
