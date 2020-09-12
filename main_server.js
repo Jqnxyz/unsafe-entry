@@ -63,14 +63,15 @@ router.get("/parse", (req, res) => {
 	let pipeDestination = null;
 	// Parse request details
 	if (req.query.pipe !== undefined) {
-		pipeDestination = req.query.pipe;
+		pipeDestination = decodeURIComponent(req.query.pipe);
 	}
 	if (req.query.phone !== undefined) {
-		phNum = req.query.phone;
+		phNum = decodeURIComponent(req.query.phone);
 	}
 	if (req.query.nric !== undefined) {
-		icNum = req.query.nric;
+		icNum = decodeURIComponent(req.query.nric);
 	}
+	console.log("Parse: "+ req.query.pipe + "Phone: " + req.query.phone + "Nric: " + req.query.nric)
 
 	// Receiving Venue details
 	if (seClient !== null) {

@@ -17,23 +17,19 @@ head
       QrScanner.WORKER_PATH = '/assets/js/qr-scanner-worker.min.js'
       const qrScanner = new QrScanner(document.getElementById("qrScanElement"), result => {
         qrScanner.stop()
-        window.location = "/parse?seUrl=" + result
+        if (typeof(Storage) !== "undefined") {
+          //alert("phone=" + localStorage.getItem("sePhone") + "&nric=" + localStorage.getItem("seNric"));
+          window.location = "/parse?pipe=se&phone=" + localStorage.getItem("sePhone") + "&nric=" + localStorage.getItem("seNric") + "&seUrl=" + result
+        } else {
+          // No stored data for SE
+          alert("Unable to submit to SafeEntry, did you configure your profile?");
+          window.location = "/parse?seUrl=" + result
+        }
       });
       function startQrScan(){
       qrScanner.setInversionMode("both");
       qrScanner.start()
       document.getElementById("qrScanElement").style.display = 'block'
-      }
-      function submitSeUrl(){
-        let seUrl = document.getElementById("qrUrlInput").value
-
-        if (typeof(Storage) !== "undefined") {
-          //alert("phone=" + localStorage.getItem("sePhone") + "&nric=" + localStorage.getItem("seNric"));
-          window.location = "/parse?pipe=se&phone=" + localStorage.getItem("sePhone") + "&nric=" + localStorage.getItem("seNric") + "&seUrl=" + seUrl
-        } else {
-          // No stored data for SE
-          window.location = "/parse?seUrl=" + seUrl
-        }
       }
       document.addEventListener("DOMContentLoaded", startQrScan);
   #qrNote
