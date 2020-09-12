@@ -24,10 +24,6 @@ head
       qrScanner.start()
       document.getElementById("qrScanElement").style.display = 'block'
       }
-      function submitSeUrl(){
-      let seUrl = document.getElementById("qrUrlInput").value
-      window.location = "/parse?seUrl=" + seUrl
-      }
       document.addEventListener("DOMContentLoaded", startQrScan);
   #qrNote
     p Bookmark this page for quick scanning
