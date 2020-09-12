@@ -24,7 +24,7 @@ function getOffsetDateObj() {
 
 function getDateString() {
 	let passDateObj = getOffsetDateObj();
-	let passDate = passDateObj.getDate() + " " + monthNames[passDateObj.getMonth()] + " " + passDateObj.getFullYear(); 
+	let passDate = passDateObj.getDate() + " " + monthNames[passDateObj.getMonth()] + " " + passDateObj.getFullYear();
 	return passDate;
 }
 
@@ -37,19 +37,22 @@ function getTimeString() {
 	return passTime;
 }
 
+function logObject(objectLog) {
+	console.log(util.inspect(objectLog, {
+		'colors': true
+	}));
+}
 
 function logRequest(req) {
-	if (unsafeConfig['logRequestBasic']) console.log("Request to " + req.url + " at " + getDateString() + ", " + getTimeString()); 
+	if (unsafeConfig['logRequestBasic']) console.log("Request to " + req.url + " at " + getDateString() + ", " + getTimeString());
 	if (unsafeConfig['logRequestDetail']) {
 		console.log("---REQUEST START---");
-		console.log("root: " + util.inspect(req, {
-			'showProxy': true,
-			'colors': true 
-		}));
+		logObject(req);
 		console.log("---REQUEST END---");
 	}
 }
 
+exports.logObject = logObject;
 exports.logRequest = logRequest;
 exports.getOffsetDateObj = getOffsetDateObj;
 exports.getDateString = getDateString;

@@ -1,0 +1,41 @@
+//- This Source Code Form is subject to the terms of the Mozilla Public
+//- License, v. 2.0. If a copy of the MPL was not distributed with this
+//- file, You can obtain one at https://mozilla.org/MPL/2.0/.
+doctype html
+head
+  meta(charset='utf-8')
+  title SafeEntry
+  link(rel='stylesheet', href='/assets/css/v2/pass.css')
+  //- Favicon
+  link(rel='icon', href='/assets/favicon.svg', sizes='any', type='image/svg+xml')
+  //- Scripts
+  script(src='/assets/js/qr-scanner.umd.min.js')
+#qrContent
+  #qrScanner
+    video#qrScanElement
+    script.
+      QrScanner.WORKER_PATH = '/assets/js/qr-scanner-worker.min.js'
+      const qrScanner = new QrScanner(document.getElementById("qrScanElement"), result => {
+        qrScanner.stop()
+        window.location = "/parse?seUrl=" + result
+      });
+      function startQrScan(){
+      qrScanner.setInversionMode("both");
+      qrScanner.start()
+      document.getElementById("qrScanElement").style.display = 'block'
+      }
+      function submitSeUrl(){
+        let seUrl = document.getElementById("qrUrlInput").value
+
+        if (typeof(Storage) !== "undefined") {
+          //alert("phone=" + localStorage.getItem("sePhone") + "&nric=" + localStorage.getItem("seNric"));
+          window.location = "/parse?pipe=se&phone=" + localStorage.getItem("sePhone") + "&nric=" + localStorage.getItem("seNric") + "&seUrl=" + seUrl
+        } else {
+          // No stored data for SE
+          window.location = "/parse?seUrl=" + seUrl
+        }
+      }
+      document.addEventListener("DOMContentLoaded", startQrScan);
+  #qrNote
+    p Bookmark this page for quick scanning
+    p#qrSubtitle Center the QR code

@@ -8,6 +8,9 @@ const renderers = require('./renderers.js');
 const parsers = require('./parsers.js');
 const utilities = require('./utilities.js');
 
+// Pipe Destinations
+const safeentry = require('./safeentry.js');
+
 //Routing
 const express = require("express");
 const axios = require('axios');
@@ -33,16 +36,43 @@ router.get("/entry", (req, res) => {
 	res.render("entry");
 });
 
+// Quick scanner
+
 router.get("/qr", (req, res) => {
 	utilities.logRequest(req);
 	res.render("entry_auto");
 });
 
+// SafeEntry mode
+
+router.get("/se/qr", (req, res) => {
+	utilities.logRequest(req);
+	res.render("entry_auto_se");
+});
+
+router.get("/se/config", (req, res) => {
+	utilities.logRequest(req);
+	res.render("config_page");
+});
+
 router.get("/parse", (req, res) => {
 	utilities.logRequest(req);
+	// Get SE Venue URL
 	let seUrl = decodeURIComponent(req.query.seUrl);
 	let seClient = parsers.parseGovUrl(seUrl);
+	let pipeDestination = null;
+	// Parse request details
+	if (req.query.pipe !== undefined) {
+		pipeDestination = req.query.pipe;
+	}
+	if (req.query.phone !== undefined) {
+		phNum = req.query.phone;
+	}
+	if (req.query.nric !== undefined) {
+		icNum = req.query.nric;
+	}
 
+	// Receiving Venue details
 	if (seClient !== null) {
 		let seBeUrl = "https://backend.safeentry-qr.gov.sg/api/v2/building?client_id="+seClient;
 		axios.get(seBeUrl, {
@@ -62,7 +92,15 @@ router.get("/parse", (req, res) => {
 		.then(function (response) {
 			//console.log(response);
 			let seVenue = response.data['venueName'];
-			res.redirect('/pass/v2/entry?venue=' + seVenue);
+
+			// Piping
+			if (pipeDestination == "se") {
+				console.log("Piped to: " + pipeDestination);
+				safeentry.submitEntry(phNum, icNum, seClient, seVenue);
+				res.redirect('/pass/v2/entry?venue=' + seVenue);
+			} else {
+				res.redirect('/pass/v2/entry?venue=' + seVenue);
+			}
 		})
 		.catch(function (error) {
 			console.log(error);
@@ -70,7 +108,7 @@ router.get("/parse", (req, res) => {
 		})
 		.finally(function () {
 			console.log("Finished Parse");
-		});		
+		});
 	} else {
 		console.log("Invalid URL");
     	res.redirect('/entry');
