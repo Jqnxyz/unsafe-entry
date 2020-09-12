@@ -32,8 +32,7 @@ const submitEntry = (phoneNumber, icNumber, clientId, subEntity) => {
         'rememberMe': false
     }
 
-    // Log the body
-    // utilities.logObject(submissionBody);
+    // Log the bodyutilities.logObject(submissionBody);
 
     // Post request
     axios({
@@ -55,7 +54,6 @@ const submitEntry = (phoneNumber, icNumber, clientId, subEntity) => {
     .catch(function (error) {
         console.log(error);
     });
-
     console.log("---");
 }
 

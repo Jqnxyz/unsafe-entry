@@ -71,7 +71,7 @@ router.get("/parse", (req, res) => {
 	if (req.query.nric !== undefined) {
 		icNum = decodeURIComponent(req.query.nric);
 	}
-	console.log("Parse: "+ req.query.pipe + "Phone: " + req.query.phone + "Nric: " + req.query.nric)
+	console.log("Parse: "+ req.query.pipe + " Phone: " + req.query.phone + " Nric: " + req.query.nric);
 
 	// Receiving Venue details
 	if (seClient !== null) {
