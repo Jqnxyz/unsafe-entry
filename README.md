@@ -1,14 +1,11 @@
 # UnsafeEntry
 
-Web service to mimic SafeEntry passes.
----
+## Web service to mimic SafeEntry passes.
 [![Maintainability](https://api.codeclimate.com/v1/badges/1ce8c042ffecebc073ba/maintainability)](https://codeclimate.com/github/Jqnxyz/unsafe-entry/maintainability)
 [![Last Commit](https://badgen.net/github/last-commit/jqnxyz/unsafe-entry)]()
 [![Run Status](https://api.shippable.com/projects/5f4163513d3f9800071fc2c7/badge?branch=master)]()
 [![Node JS CI](https://github.com/jqnxyz/unsafe-entry/workflows/Node.js%20CI/badge.svg)]()
-
 ## Why
-
 While SafeEntry is a good concept for contact tracing efforts, the implementation leaves much to be desired.
 
 With the normalisation of SafeEntry, many users essentially have their freedom of movement limited if they decide that they want to maintain control of their privacy.
@@ -16,8 +13,7 @@ With the normalisation of SafeEntry, many users essentially have their freedom o
 This paves the way for a dangerous possibility where analysis of such a massive collection of location data could be done with possible malicious intent (e.g. prediction of individual movements through pattern analysis).
 
 ### How it could be better
-
-Much like how the Exposure Notification system works, we could ,*instead* of centralising the movements of **all** users, centralise the movements of those who have been **infected**. 
+Much like how the Exposure Notification system works, we could ,*instead* of centralising the movements of **all** users, centralise the movements of those who have been **infected**.
 
 This allows SafeEntry to store the users' movements locally, checking against the central database to see if any of the venue visitation periods recorded by the *infected* users coincides with any of the local users' recorded movements.
 
@@ -31,7 +27,6 @@ This way, all infected peoples' records could be uploaded anonymously, and the u
 	* A workaround to this is to either manually record your visits and/or leave Google's location history feature on to provide data to MOH if you are infected.
 
 ### Project lifetime
-
 Until users are given the choice to withhold their data, or a privacy-preserving solution is presented and implemented, this project will continue to provide a workaround for those who seek such choices.
 
 ## Feature Requests/Issues
@@ -65,7 +60,7 @@ Start the server with `node index.js`
 Then visit `localhost:8443` on your local machine.
 
 #### Service file
-*Tested on Ubuntu/debian only!* 
+*Tested on Ubuntu/debian only!*
 
 Instead of using a command to start the server, a service file can make deployment easier.
 
@@ -101,17 +96,21 @@ sudo systemctl start unsafe-entry;
 ## Endpoints
 Several routes (all `GET`) are defined for this;
 * `/`
-	Redirects to `/entry`
+Redirects to `/entry`
 * `/entry`
-	User interface for scanning and providing a URL.
+User interface for scanning and providing a URL.
 * `/qr `
-	Instantly launches the QR scanning frame for quick scanning.
+Instantly launches the QR scanning frame for quick scanning.
+* `/se/qr`
+Launches the QR scanning frame that submits through the official SafeEntry API.
+* `/se/config`
+Configures the data sent to SafeEntry for `/se/*` endpoints. Utilises localstorage.
 * `/parse`
-	Parses a QR-SafeEntry URL to find the venue name, returns a redirect to either `/entry` if failed or `/pass/v2` with the appropriate parameters attached.
+Parses a QR-SafeEntry URL to find the venue name, returns a redirect to either `/entry` if failed or `/pass/v2` with the appropriate parameters attached.
 * `/pass/v1/entry`
-	Display the older SafeEntry pass with the current date and time, using the venue provided in a `?venue=` parameter. 
+Display the older SafeEntry pass with the current date and time, using the venue provided in a `?venue=` parameter.
 * `/pass/v2/entry`
-	Display the newer SafeEntry pass with the current date and time, using the venue provided in a `?venue=` parameter. 
+Display the newer SafeEntry pass with the current date and time, using the venue provided in a `?venue=` parameter.
 
 ## Acknowledgements
 * NIMIQ's QR Scanner ([License](Licenses/QR-SCANNER-LICENSE), [Repo](https://github.com/nimiq/qr-scanner))
