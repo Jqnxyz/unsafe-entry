@@ -13,12 +13,18 @@ const utilities = require('./utilities.js');
 // SafeEntry API endpoint
 const seApiPerson = "https://backend.safeentry-qr.gov.sg/api/v2/person";
 
-const submitEntry = (phoneNumber, icNumber, clientId, subEntity) => {
-    // Create phone number body param
-    var utfByteEncodedPN = utf8.encode(phoneNumber);
-    var b64EncodedPN = base64.encode(utfByteEncodedPN);
-    console.log("---> Submit SE");
+const checkIn = (phoneNumber, icNumber, clientId, subEntity) => {
+    submitData(phoneNumber, icNumber, clientId, subEntity, "checkin");
+}
 
+const checkOut = (phoneNumber, icNumber, clientId, subEntity) => {
+    submitData(phoneNumber, icNumber, clientId, subEntity, "checkout");
+}
+
+const submitBodyCreator = (phoneNumber, icNumber, clientId, subEntity) => {
+    // Create phone number body param
+    let utfByteEncodedPN = utf8.encode(phoneNumber);
+    let b64EncodedPN = base64.encode(utfByteEncodedPN);
     // Create submission body
     let submissionBody = {
         'mobileno': b64EncodedPN,
@@ -31,33 +37,49 @@ const submitEntry = (phoneNumber, icNumber, clientId, subEntity) => {
         'subType': 'uinfin',
         'rememberMe': false
     }
+    // Log the body
+    utilities.logObject(submissionBody);
+    return submissionBody;
+}
 
-    // Log the bodyutilities.logObject(submissionBody);
+const submitData = (phoneNumber, icNumber, clientId, subEntity, typeCheck) => {
+    console.log("---> START Submit SafeEntry <---");
+    // Create submission body
+    let submissionBody = submitBodyCreator(phoneNumber, icNumber, clientId, subEntity, typeCheck);
+    // Submit
+    postRequestHandler(submissionBody);
+    console.log("---> FINISH Submit SafeEntry <---");
+}
 
+function postRequestHandler(body) {
     // Post request
     axios({
         method: 'post',
         url: seApiPerson,
-        data: qs.stringify(submissionBody),
+        data: qs.stringify(body),
         headers: {
             'content-type': 'application/x-www-form-urlencoded;charset=utf-8'
         }
     }).then(function (response) {
-        if (response['status'] == 200) {
-            returnData = response['data']['message']['transactionId'];
-            console.log(returnData);
-        } else {
-            returnData = "failed";
-            console.log("FAILED: " + response);
-        }
+        postResponseHandler(response);
     })
     .catch(function (error) {
-        console.log(error);
+        postResponseHandler(response);
     });
-    console.log("---");
 }
 
-exports.submitEntry = submitEntry;
+function postResponseHandler(response) {
+    if (response['status'] == 200) {
+        returnData = response['data']['message']['transactionId'];
+        console.log(returnData);
+    } else {
+        returnData = "failed";
+        console.log("FAILED: " + response);
+    }
+}
+
+exports.checkIn = checkIn;
+exports.checkOut = checkOut;
 
 // POST https://backend.safeentry-qr.gov.sg/api/v2/person
 
