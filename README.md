@@ -1,11 +1,10 @@
 # UnsafeEntry
 
 ## Web service to mimic SafeEntry passes.
-[Maintainability](https://codeclimate.com/github/Jqnxyz/unsafe-entry/maintainability)
-[Last Commit]()
-[Run Status]()
-[<a href='README/badge.svg'>badge.svg</a>Node JS CI]()
-
+[![Maintainability](https://api.codeclimate.com/v1/badges/1ce8c042ffecebc073ba/maintainability)](https://codeclimate.com/github/Jqnxyz/unsafe-entry/maintainability)
+[![Last Commit](https://badgen.net/github/last-commit/jqnxyz/unsafe-entry)]()
+[![Run Status](https://api.shippable.com/projects/5f4163513d3f9800071fc2c7/badge?branch=master)]()
+[![Node JS CI](https://github.com/jqnxyz/unsafe-entry/workflows/Node.js%20CI/badge.svg)]()
 ## Why
 While SafeEntry is a good concept for contact tracing efforts, the implementation leaves much to be desired.
 
