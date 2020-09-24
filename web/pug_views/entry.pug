@@ -35,7 +35,7 @@ head
         }
         function submitSePass(){
         let sePass = document.getElementById("qrPassInput").value
-        window.location = "/pass/v2/entry?venue=" + sePass
+        window.location = "/pass/v3/entry?venue=" + sePass
         }
       button#qrScanButton(onclick='startQrScan()') Scan QR Code
       p#qrUrlTitle or enter the QR URL here
@@ -52,3 +52,5 @@ head
       a(href='/se/config') Configure SafeEntry
       br
       a(href='/se/qr') Quick scan (Submit with SafeEntry)
+      hr
+      a(href='https://github.com/jqnxyz/unsafe-entry') UnsafeEntry Github
