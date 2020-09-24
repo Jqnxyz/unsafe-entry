@@ -1,0 +1,26 @@
+//- This Source Code Form is subject to the terms of the Mozilla Public
+//- License, v. 2.0. If a copy of the MPL was not distributed with this
+//- file, You can obtain one at https://mozilla.org/MPL/2.0/.
+doctype html
+head
+  meta(charset='utf-8')
+  title SafeEntry
+  link(rel='stylesheet', href='/assets/css/v3/pass.css')
+  //- Favicon
+  link(rel='icon', href='/assets/favicon.svg', sizes='any', type='image/svg+xml')
+  //- Fonts
+  link(href='https://fonts.googleapis.com/icon?family=Material+Icons', rel='stylesheet')
+#useHeader
+  #useLogo
+#useContent
+  #usePass
+    img#usePassCheck(src='/assets/images/v2/success-green-1.svg')
+    #usePassLogo
+      img#usePassLogoImage(src='/assets/images/v2/se-checkin.svg')
+    #usePassContent
+      #usePassContentTexts
+        p#usePassContentDate.usePassText #{date}
+        p#usePassContentTime.usePassText #{time}
+        p#usePassContentLocation.usePassText #{location}
+      #usePassGovTech
+        img#usePassGovTechImage(src='/assets/images/v2/gt-logo.svg')

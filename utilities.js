@@ -13,6 +13,9 @@ const hrOffset = parseInt(unsafeConfig['utcOffset']);
 const monthNames = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
 ];
+const monthNamesShort = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+];
 
 function getOffsetDateObj() {
 	let currentDate = new Date();
@@ -22,9 +25,10 @@ function getOffsetDateObj() {
 	return passDateObj;
 }
 
-function getDateString() {
+function getDateString(shortDate = false) {
 	let passDateObj = getOffsetDateObj();
-	let passDate = passDateObj.getDate() + " " + monthNames[passDateObj.getMonth()] + " " + passDateObj.getFullYear();
+	let monthPart = shortDate ? monthNamesShort[passDateObj.getMonth()] : monthNames[passDateObj.getMonth()];
+	let passDate = passDateObj.getDate() + " " + monthPart + " " + passDateObj.getFullYear();
 	return passDate;
 }
 
