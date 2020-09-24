@@ -3,12 +3,19 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
 const utilities = require('./utilities.js');
-function renderPass(ver, req, res) {
+
+function renderPass(ver, dateFormat, req, res) {
 	let passLocation = req.query.venue !== undefined ? req.query.venue : "No parameter";
 	utilities.logRequest(req);
+    let dateString = null;
+    if (dateFormat == "1") {
+        dateString = utilities.getDateString(true);
+    } else {
+        dateString = utilities.getDateString();
+    }
 	res.render(ver,{
   		location: passLocation.toUpperCase(),
-  		date: utilities.getDateString(),
+  		date: dateString,
   		time: utilities.getTimeString()
 	});
 }

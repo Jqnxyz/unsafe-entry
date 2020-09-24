@@ -98,9 +98,9 @@ router.get("/parse", (req, res) => {
 			if (pipeDestination == "se") {
 				console.log("Piped to: " + pipeDestination);
 				safeentry.checkIn(phNum, icNum, seClient, seVenue);
-				res.redirect('/pass/v2/entry?venue=' + seVenue);
+				res.redirect('/pass/v3/entry?venue=' + seVenue);
 			} else {
-				res.redirect('/pass/v2/entry?venue=' + seVenue);
+				res.redirect('/pass/v3/entry?venue=' + seVenue);
 			}
 		})
 		.catch(function (error) {
@@ -118,11 +118,15 @@ router.get("/parse", (req, res) => {
 
 
 router.get("/pass/v1/entry", (req, res) => {
-	renderers.renderPass("pass", req, res);
+	renderers.renderPass("pass", 0, req, res);
 });
 
 router.get("/pass/v2/entry", (req, res) => {
-	renderers.renderPass("pass_v2", req, res);
+	renderers.renderPass("pass_v2", 0, req, res);
+});
+
+router.get("/pass/v3/entry", (req, res) => {
+	renderers.renderPass("pass_v3", 1, req, res);
 });
 
 app.use("/", router);
