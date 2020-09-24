@@ -23,7 +23,7 @@ head
         function saveConfig() {
           if (typeof(Storage) !== "undefined") {
             localStorage.setItem("sePhone", document.getElementById("sePhoneInput").value);
-            localStorage.setItem("seNric", document.getElementById("seNricInput").value);
+            localStorage.setItem("seNric", document.getElementById("seNricInput").value.toUpperCase());
             alert("Saved.");
           } else {
             alert("No storage support.");
