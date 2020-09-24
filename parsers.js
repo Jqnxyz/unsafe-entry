@@ -5,12 +5,16 @@
 function parseGovUrl(seUrl) {
 	let seMatch01 = seUrl.match(/^(?:url:)?https\:\/\/www\.safeentry-qr\.gov\.sg\/tenant\/([A-Z0-9-/]+)/);
 	let seMatch02 = seUrl.match(/^(?:url:)?https\:\/\/temperaturepass\.ndi-api\.gov\.sg\/login\/([A-Z0-9-/]+)/);
+	let seMatch03 = seUrl.match(/^(?:url:)?https\:\/\/www\.safeentry-qr\.gov\.sg\/login\/([A-Z0-9-/]+)/);
 	let seClient = null;
 	if (seMatch01 !== null) {
 		seClient = seMatch01[1];
 	}
 	if (seMatch02 !== null) {
 		seClient = seMatch02[1];
+	}
+	if (seMatch03 !== null) {
+		seClient = seMatch03[1];
 	}
 	return seClient;
 }
