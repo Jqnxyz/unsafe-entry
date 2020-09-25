@@ -9,7 +9,7 @@ body {
     width: 100vw;
     align-content: center;
     text-align: center;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
 #useHeader {
@@ -117,7 +117,7 @@ body {
     font-size: 4vh;
     margin-top: 4vh;
     margin-bottom: 4vh;
-    font-weight: 200;
+    font-weight: 300;
     padding-left: 1vw;
     padding-right: 1vw;
 }
