@@ -22,6 +22,7 @@ This way, all infected peoples' records could be uploaded anonymously, and the u
 ### Downsides to this workaround
 
 * You won't be able to be contacted through SafeEntry tracing methods if you've been exposed to an infected patient.
+    * Unless the `/se/*` endpoints are used, in which case the submission of data is still performed.
 
 * You won't be able to contribute past movements to SafeEntry if you decide to switch back to using SafeEntry.
 	* A workaround to this is to either manually record your visits and/or leave Google's location history feature on to provide data to MOH if you are infected.
@@ -69,11 +70,11 @@ Set up the service file `unsafe-entry.service` to allow control with `systemctl`
 *Change the source path below to where the cloned repo resides.*
 
 ```sh
-sudo cp /path/to/unsafe-entry.service /etc/systemd/system/unsafe-entry.service; 
+sudo cp /path/to/unsafe-entry.service /etc/systemd/system/unsafe-entry.service;
 # This enables start on boot, useful innit?
 sudo systemctl enable unsafe-entry;
 # Starts up the server
-sudo systemctl start unsafe-entry; 
+sudo systemctl start unsafe-entry;
 ```
 
 ## Scripts
@@ -106,11 +107,9 @@ Launches the QR scanning frame that submits through the official SafeEntry API.
 * `/se/config`
 Configures the data sent to SafeEntry for `/se/*` endpoints. Utilises localstorage.
 * `/parse`
-Parses a QR-SafeEntry URL to find the venue name, returns a redirect to either `/entry` if failed or `/pass/v2` with the appropriate parameters attached.
-* `/pass/v1/entry`
-Display the older SafeEntry pass with the current date and time, using the venue provided in a `?venue=` parameter.
-* `/pass/v2/entry`
-Display the newer SafeEntry pass with the current date and time, using the venue provided in a `?venue=` parameter.
+Parses a QR-SafeEntry URL through a `seUrl` parameter to find the venue name, returns a redirect to either `/entry` if failed or `/pass/vℤ` (ℤ being the latest applicable version, see below) with the appropriate parameters attached. Additionally, now accepts a `pipe` parameter to specify a handler for `seUrl` provided.
+* `/pass/vℤ/entry`
+Display a SafeEntry pass of version `ℤ` (1 <= ℤ <= 3) , using the venue provided in a `?venue=` parameter.
 
 ## Acknowledgements
 * NIMIQ's QR Scanner ([License](Licenses/QR-SCANNER-LICENSE), [Repo](https://github.com/nimiq/qr-scanner))
