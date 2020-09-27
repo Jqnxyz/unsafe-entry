@@ -8,6 +8,12 @@ const renderers = require('./renderers.js');
 const parsers = require('./parsers.js');
 const utilities = require('./utilities.js');
 
+// Config
+const configLoader = require('./config_loader');
+configLoader.setFile('unsafe-config.json');
+const unsafeConfig = configLoader.getConfig();
+const configDomain = unsafeConfig['domain'];
+
 // Pipe Destinations
 const safeentry = require('./safeentry.js');
 
@@ -33,26 +39,34 @@ router.get("/", (req, res) => {
 
 router.get("/entry", (req, res) => {
 	utilities.logRequest(req);
-	res.render("entry");
+	res.render("entry", {
+        domain: configDomain
+	});
 });
 
 // Quick scanner
 
 router.get("/qr", (req, res) => {
 	utilities.logRequest(req);
-	res.render("entry_auto");
+	res.render("entry_auto", {
+        domain: configDomain
+	});
 });
 
 // SafeEntry mode
 
 router.get("/se/qr", (req, res) => {
 	utilities.logRequest(req);
-	res.render("entry_auto_se");
+	res.render("entry_auto_se", {
+        domain: configDomain
+	});
 });
 
 router.get("/se/config", (req, res) => {
 	utilities.logRequest(req);
-	res.render("config_page");
+	res.render("config_page", {
+        domain: configDomain
+	});
 });
 
 router.get("/parse", (req, res) => {
@@ -116,6 +130,7 @@ router.get("/parse", (req, res) => {
 	}
 });
 
+// Passes, refactor this
 
 router.get("/pass/v1/entry", (req, res) => {
 	renderers.renderPass("pass", 0, req, res);
