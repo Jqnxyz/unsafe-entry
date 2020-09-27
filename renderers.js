@@ -3,6 +3,9 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
 const utilities = require('./utilities.js');
+const configLoader = require('./config_loader');
+configLoader.setFile('unsafe-config.json');
+const unsafeConfig = configLoader.getConfig();
 
 function renderPass(ver, dateFormat, req, res) {
 	let passLocation = req.query.venue !== undefined ? req.query.venue : "No parameter";
@@ -14,6 +17,7 @@ function renderPass(ver, dateFormat, req, res) {
         dateString = utilities.getDateString();
     }
 	res.render(ver,{
+        domain: unsafeConfig['domain'],
   		location: passLocation.toUpperCase(),
   		date: dateString,
   		time: utilities.getTimeString()
