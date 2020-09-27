@@ -33,21 +33,21 @@ router.get("/", (req, res) => {
 
 router.get("/entry", (req, res) => {
 	utilities.logRequest(req);
-	renderers.renderBasic("entry");
+	renderers.renderBasic("entry", req, res);
 });
 
 // Quick scanner
 
 router.get("/qr", (req, res) => {
 	utilities.logRequest(req);
-	renderers.renderBasic("entry_auto");
+	renderers.renderBasic("entry_auto", req, res);
 });
 
 // SafeEntry mode
 
 router.get("/se/qr", (req, res) => {
 	utilities.logRequest(req);
-	renderers.renderBasic("entry_auto_se");
+	renderers.renderBasic("entry_auto_se", req, res);
 });
 
 router.get("/se/config", (req, res) => {

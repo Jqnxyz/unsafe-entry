@@ -24,7 +24,7 @@ function renderPass(ver, dateFormat, req, res) {
     });
 }
 
-function renderBasic(ver, opt = {domain: unsafeConfig['domain']}, req, res) {
+function renderBasic(ver, req, res, opt = {domain: unsafeConfig['domain']}) {
     res.render(ver, opt);
 }
 
