@@ -8,20 +8,25 @@ configLoader.setFile('unsafe-config.json');
 const unsafeConfig = configLoader.getConfig();
 
 function renderPass(ver, dateFormat, req, res) {
-	let passLocation = req.query.venue !== undefined ? req.query.venue : "No parameter";
-	utilities.logRequest(req);
+    let passLocation = req.query.venue !== undefined ? req.query.venue : "No parameter";
+    utilities.logRequest(req);
     let dateString = null;
     if (dateFormat == "1") {
         dateString = utilities.getDateString(true);
     } else {
         dateString = utilities.getDateString();
     }
-	res.render(ver,{
+    res.render(ver,{
         domain: unsafeConfig['domain'],
-  		location: passLocation.toUpperCase(),
-  		date: dateString,
-  		time: utilities.getTimeString()
-	});
+        location: passLocation.toUpperCase(),
+        date: dateString,
+        time: utilities.getTimeString()
+    });
+}
+
+function renderBasic(ver, req, res, opt = {domain: unsafeConfig['domain']}) {
+    res.render(ver, opt);
 }
 
 exports.renderPass = renderPass;
+exports.renderBasic = renderBasic;
