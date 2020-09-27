@@ -7,7 +7,7 @@
 const renderers = require('./renderers.js');
 const parsers = require('./parsers.js');
 const utilities = require('./utilities.js');
-const nric = require('@Jqnxyz/nric-tools');
+const nric = require('nric-tools');
 
 // Pipe Destinations
 const safeentry = require('./safeentry.js');
