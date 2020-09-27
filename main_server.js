@@ -7,6 +7,7 @@
 const renderers = require('./renderers.js');
 const parsers = require('./parsers.js');
 const utilities = require('./utilities.js');
+const nric = require('nric-tools');
 
 // Pipe Destinations
 const safeentry = require('./safeentry.js');
@@ -24,6 +25,19 @@ app.set("views", path.join(__dirname, "web/pug_views"));
 
 // Statics
 app.use('/assets', express.static('web/assets'));
+
+// Headers
+const headersDefault = {
+		'Cache-Control': 'no-cache',
+		'authority': 'backend.safeentry-qr.gov.sg',
+		'accept': 'application/json, text/plain, */*',
+		'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4235.0 Mobile Safari/537.36',
+		'origin': 'https://www.safeentry-qr.gov.sg',
+		'sec-fetch-site': 'same-site',
+		'sec-fetch-mode': 'cors',
+		'sec-fetch-dest': 'empty',
+		'accept-language': 'en-GB,en-US;q=0.9,en;q=0.8'
+	}
 
 // Views
 router.get("/", (req, res) => {
@@ -60,8 +74,8 @@ router.get("/parse", (req, res) => {
 	// Get SE Venue URL
 	let seUrl = decodeURIComponent(req.query.seUrl);
 	let seClient = parsers.parseGovUrl(seUrl);
-	let pipeDestination = null;
-	let parseReferer = null;
+	let pipeDestination, parseReferer, icNum, phNum = null;
+
 	// Parse request details
 	if (req.query.referer !== undefined) {
 		parseReferer = decodeURIComponent(req.query.referer);
@@ -72,29 +86,29 @@ router.get("/parse", (req, res) => {
 		pipeDestination = decodeURIComponent(req.query.pipe);
 	}
 	if (req.query.phone !== undefined) {
-		phNum = decodeURIComponent(req.query.phone);
+		if (req.query.phone.length == 8 && /^\d+$/.test(req.query.phone)) {
+			phNum = decodeURIComponent(req.query.phone);
+		} else {
+			console.log("Phone Invalid")
+		}
 	}
 	if (req.query.nric !== undefined) {
-		icNum = decodeURIComponent(req.query.nric);
+		if (nric.verifyChecksum(req.query.nric)) {
+		    icNum = decodeURIComponent(req.query.nric);
+		} else {
+		    console.log("NRIC Invalid");
+		}
+
 	}
 	console.log("Referer: " + req.query.referer + " Pipe: "+ req.query.pipe + " Phone: " + req.query.phone + " Nric: " + req.query.nric);
 
 	// Receiving Venue details
 	if (seClient !== null) {
 		let seBeUrl = "https://backend.safeentry-qr.gov.sg/api/v2/building?client_id="+seClient;
+		let refererHeader = { 'referer': 'https://www.safeentry-qr.gov.sg/tenantList/'+seClient }
+		let mergedHeaders = {...headersDefault, ...refererHeader};
 		axios.get(seBeUrl, {
-		  	headers: {
-		    	'Cache-Control': 'no-cache',
-		    	'authority': 'backend.safeentry-qr.gov.sg',
-		    	'accept': 'application/json, text/plain, */*',
-		    	'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4235.0 Mobile Safari/537.36',
-		    	'origin': 'https://www.safeentry-qr.gov.sg',
-		    	'sec-fetch-site': 'same-site',
-		    	'sec-fetch-mode': 'cors',
-		    	'sec-fetch-dest': 'empty',
-		    	'referer': 'https://www.safeentry-qr.gov.sg/tenantList/'+seClient,
-		    	'accept-language': 'en-GB,en-US;q=0.9,en;q=0.8'
-		  	}
+		  	headers: mergedHeaders
 		})
 		.then(function (response) {
 			//console.log(response);
@@ -102,8 +116,8 @@ router.get("/parse", (req, res) => {
 
 			// Piping
 			if (pipeDestination == "se") {
-				console.log("Piped to: " + pipeDestination);
-				safeentry.checkIn(phNum, icNum, seClient, seVenue);
+				console.log("Piping handle to: " + pipeDestination);
+				if (icNum !== null && phNum !== null) safeentry.checkIn(phNum, icNum, seClient, seVenue);
 				res.redirect('/pass/latest/entry?venue=' + seVenue);
 			} else {
 				res.redirect('/pass/latest/entry?venue=' + seVenue);
