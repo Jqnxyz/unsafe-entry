@@ -52,7 +52,7 @@ router.get("/se/qr", (req, res) => {
 
 router.get("/se/config", (req, res) => {
 	utilities.logRequest(req);
-	renderers.renderBasic("config_page");
+	renderers.renderBasic("config_page", req, res);
 });
 
 router.get("/parse", (req, res) => {
