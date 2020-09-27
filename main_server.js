@@ -104,9 +104,9 @@ router.get("/parse", (req, res) => {
 			if (pipeDestination == "se") {
 				console.log("Piped to: " + pipeDestination);
 				safeentry.checkIn(phNum, icNum, seClient, seVenue);
-				res.redirect('/pass/v3/entry?venue=' + seVenue);
+				res.redirect('/pass/latest/entry?venue=' + seVenue);
 			} else {
-				res.redirect('/pass/v3/entry?venue=' + seVenue);
+				res.redirect('/pass/latest/entry?venue=' + seVenue);
 			}
 		})
 		.catch(function (error) {

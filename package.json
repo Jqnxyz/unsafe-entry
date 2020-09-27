@@ -1,6 +1,6 @@
 {
     "name": "unsafe-entry",
-    "version": "1.1.0",
+    "version": "1.1.4",
     "description": "Mock SafeEntry, protect privacy.",
     "main": "start.js",
     "scripts": {
