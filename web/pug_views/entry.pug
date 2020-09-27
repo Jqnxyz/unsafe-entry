@@ -25,7 +25,7 @@ head
         QrScanner.WORKER_PATH = 'assets/js/qr-scanner-worker.min.js'
         const qrScanner = new QrScanner(document.getElementById("qrScanElement"), result => {
           qrScanner.stop()
-          window.location = "/parse?seUrl=" + result
+          window.location = "/parse?referer=%2Fentry&seUrl=" + result
         });
         function startQrScan(){
         qrScanner.start()
@@ -33,11 +33,11 @@ head
         }
         function submitSeUrl(){
         let seUrl = document.getElementById("qrUrlInput").value
-        window.location = "/parse?seUrl=" + seUrl
+        window.location = "/parse?referer=%2Fentry&seUrl=" + seUrl
         }
         function submitSePass(){
         let sePass = document.getElementById("qrPassInput").value
-        window.location = "/pass/v3/entry?venue=" + sePass
+        window.location = "/pass/latest/entry?venue=" + sePass
         }
       button#qrScanButton(onclick='startQrScan()') Scan QR Code
       p#qrUrlTitle or enter the QR URL here

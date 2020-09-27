@@ -19,7 +19,7 @@ head
       QrScanner.WORKER_PATH = 'assets/js/qr-scanner-worker.min.js'
       const qrScanner = new QrScanner(document.getElementById("qrScanElement"), result => {
         qrScanner.stop()
-        window.location = "/parse?seUrl=" + result
+        window.location = "/parse?referer=%2Fqr&seUrl=" + result
       });
       function startQrScan(){
       qrScanner.setInversionMode("both");

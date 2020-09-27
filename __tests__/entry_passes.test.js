@@ -6,7 +6,7 @@ const app = require('../main_server.js')
 const supertest = require('supertest')
 const request = supertest(app)
 
-const passEntryVersions = ['v1', 'v2', 'v3'];
+const passEntryVersions = ['latest', 'v1', 'v2', 'v3'];
 
 passEntryVersions.forEach( function(element, index) {
   it('Testing pass entry endpoint ' + element, async done => {
