@@ -61,7 +61,13 @@ router.get("/parse", (req, res) => {
 	let seUrl = decodeURIComponent(req.query.seUrl);
 	let seClient = parsers.parseGovUrl(seUrl);
 	let pipeDestination = null;
+	let parseReferer = null;
 	// Parse request details
+	if (req.query.referer !== undefined) {
+		parseReferer = decodeURIComponent(req.query.referer);
+	} else {
+		parseReferer = "/entry";
+	}
 	if (req.query.pipe !== undefined) {
 		pipeDestination = decodeURIComponent(req.query.pipe);
 	}
@@ -71,7 +77,7 @@ router.get("/parse", (req, res) => {
 	if (req.query.nric !== undefined) {
 		icNum = decodeURIComponent(req.query.nric);
 	}
-	console.log("Parse: "+ req.query.pipe + " Phone: " + req.query.phone + " Nric: " + req.query.nric);
+	console.log("Referer: " + req.query.referer + " Pipe: "+ req.query.pipe + " Phone: " + req.query.phone + " Nric: " + req.query.nric);
 
 	// Receiving Venue details
 	if (seClient !== null) {
@@ -105,14 +111,14 @@ router.get("/parse", (req, res) => {
 		})
 		.catch(function (error) {
 			console.log(error);
-	    	res.redirect('/entry');
+	    	res.redirect(parseReferer);
 		})
 		.finally(function () {
 			console.log("Finished Parse");
 		});
 	} else {
 		console.log("Invalid URL");
-    	res.redirect('/entry');
+    	res.redirect(parseReferer);
 	}
 });
 

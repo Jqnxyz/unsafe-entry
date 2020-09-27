@@ -21,11 +21,11 @@ head
         qrScanner.stop()
         if (typeof(Storage) !== "undefined") {
           //alert("phone=" + localStorage.getItem("sePhone") + "&nric=" + localStorage.getItem("seNric"));
-          window.location = "/parse?pipe=se&phone=" + localStorage.getItem("sePhone") + "&nric=" + localStorage.getItem("seNric") + "&seUrl=" + result
+          window.location = "/parse?pipe=se&referer=%2Fse%2Fqr&phone=" + localStorage.getItem("sePhone") + "&nric=" + localStorage.getItem("seNric") + "&seUrl=" + result
         } else {
           // No stored data for SE
           alert("Unable to submit to SafeEntry, did you configure your profile?");
-          window.location = "/parse?seUrl=" + result
+          window.location = "/parse?referer=%2Fse%2Fqr&seUrl=" + result
         }
       });
       function startQrScan(){
