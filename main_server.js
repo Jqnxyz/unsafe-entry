@@ -7,6 +7,8 @@
 const renderers = require('./renderers.js');
 const parsers = require('./parsers.js');
 const utilities = require('./utilities.js');
+const nric = require('@Jqnxyz/nric-tools');
+
 
 // Pipe Destinations
 const safeentry = require('./safeentry.js');
@@ -62,6 +64,7 @@ router.get("/parse", (req, res) => {
 	let seClient = parsers.parseGovUrl(seUrl);
 	let pipeDestination = null;
 	let parseReferer = null;
+	let icNum = null;
 	// Parse request details
 	if (req.query.referer !== undefined) {
 		parseReferer = decodeURIComponent(req.query.referer);
@@ -75,7 +78,12 @@ router.get("/parse", (req, res) => {
 		phNum = decodeURIComponent(req.query.phone);
 	}
 	if (req.query.nric !== undefined) {
-		icNum = decodeURIComponent(req.query.nric);
+		if (nric.verifyChecksum(req.query.nric)) {
+		    icNum = decodeURIComponent(req.query.nric);
+		} else {
+		    console.log("NRIC Invalid");
+		}
+
 	}
 	console.log("Referer: " + req.query.referer + " Pipe: "+ req.query.pipe + " Phone: " + req.query.phone + " Nric: " + req.query.nric);
 
@@ -103,7 +111,7 @@ router.get("/parse", (req, res) => {
 			// Piping
 			if (pipeDestination == "se") {
 				console.log("Piped to: " + pipeDestination);
-				safeentry.checkIn(phNum, icNum, seClient, seVenue);
+				if (icNum !== null) safeentry .checkIn(phNum, icNum, seClient, seVenue);
 				res.redirect('/pass/latest/entry?venue=' + seVenue);
 			} else {
 				res.redirect('/pass/latest/entry?venue=' + seVenue);
