@@ -6,6 +6,9 @@ const app = require('../main_server.js')
 const supertest = require('supertest')
 const request = supertest(app)
 
+
+// rewrite to use object nesting
+
 const endpointReturnCodes = [200, 302];
 const endpoint200 = ['/entry', '/qr', '/se/qr', '/se/config'];
 const endpoint302 = ['/'];

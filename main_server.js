@@ -115,8 +115,8 @@ router.get("/parse", (req, res) => {
 			let seVenue = response.data['venueName'];
 
 			// Piping
+			console.log("Piping handle to: " + pipeDestination);
 			if (pipeDestination == "se") {
-				console.log("Piping handle to: " + pipeDestination);
 				if (icNum !== null && phNum !== null) safeentry.checkIn(phNum, icNum, seClient, seVenue);
 				res.redirect('/pass/latest/entry?venue=' + seVenue);
 			} else {
