@@ -31,7 +31,7 @@ const headersDefault = {
 		'Cache-Control': 'no-cache',
 		'authority': 'backend.safeentry-qr.gov.sg',
 		'accept': 'application/json, text/plain, */*',
-		'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4235.0 Mobile Safari/537.36',
+		'user-agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 14_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 Mobile/15E148 Safari/604.1',
 		'origin': 'https://www.safeentry-qr.gov.sg',
 		'sec-fetch-site': 'same-site',
 		'sec-fetch-mode': 'cors',
